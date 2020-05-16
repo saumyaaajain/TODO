@@ -1,0 +1,29 @@
+.box{
+    border-radius: 50px;
+    width: 35vw;
+    margin: auto;
+}
+
+.item{
+    font-size: medium;
+    margin: 10px;
+}
+
+.itemBox{
+    border: mediumpurple;
+    background-color: #61dafb;
+    color: white;
+}
+
+.line {
+    border-bottom: 1px solid;
+}
+
+.lineVer{
+    border-right: 1px solid;
+}
+
+.col{
+    display: flex;
+    flex-direction: row;
+}

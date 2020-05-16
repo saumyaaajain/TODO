@@ -2,19 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37f70c7c-c257-4db5-a78d-b85d52967a1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/actions/task.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AddFile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/AddTaskPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/TaskListItem.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ViewFile.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/reducers/task.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/router/AppRouter.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/style/ViewFile.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddTaskPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTaskPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskListItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ViewFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/AppRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/AppRouter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,7 +66,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589564447435</updated>
-      <workItem from="1589564449951" duration="10013000" />
+      <workItem from="1589564449951" duration="17785000" />
     </task>
     <servers />
   </component>
@@ -87,5 +82,9 @@
       <screen x="0" y="0" width="1440" height="900" />
     </state>
     <state x="474" y="260" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1440.900@0.0.1440.900" timestamp="1589564894075" />
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup" timestamp="1589630249201">
+      <screen x="0" y="0" width="1440" height="900" />
+    </state>
+    <state x="385" y="196" width="670" height="676" key="search.everywhere.popup/0.0.1440.900@0.0.1440.900" timestamp="1589630249201" />
   </component>
 </project>

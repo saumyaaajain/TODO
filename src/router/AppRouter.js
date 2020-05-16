@@ -6,21 +6,29 @@ import ViewFile from "../components/ViewFile";
 
 function AppRouter() {
     return (
-        <Router>
-            <div className="App">
-                <header className="App-header">
-                    TO DO
-                    <div className="Row">
-                        <NavLink style={{"paddingRight": "20px"}} to="/" exact={true} >Dashboard</NavLink>
-                        <NavLink className="Padding" to="/add" >Add</NavLink>
-                    </div>
-                </header>
-                <Switch>
-                    <Route path="/" component={ViewFile} exact={true}/>
-                    <Route path="/add" component={AddTaskPage}/>
-                </Switch>
+        <div className="Row">
+            <div className="SideBar">
+                <div className="Profile line"/>
             </div>
-        </Router>
+            <Router>
+                <div className="App">
+                    <header className="App-header">
+                        TO DO
+                    </header>
+                    <div className="content">
+                        <div className="col">
+                            <h3><NavLink to="/" exact={true} >Dashboard</NavLink></h3>
+                            <h3><NavLink className="Padding" to="/add" >Add</NavLink></h3>
+                        </div>
+                        <div className="line" />
+                        <Switch>
+                            <Route path="/" component={ViewFile} exact={true}/>
+                            <Route path="/add" component={AddTaskPage}/>
+                        </Switch>
+                    </div>
+                </div>
+            </Router>
+        </div>
     );
 }
 
