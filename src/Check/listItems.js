@@ -29,11 +29,13 @@ export const mainListItems = (
                 <ListItemText primary="Add Task" />
             </ListItem>
         </NavLink>
-        <ListItem button>
-            <ListItemIcon>
-                <BarChartIcon />
-            </ListItemIcon>
-            <ListItemText primary="Reports" />
-        </ListItem>
+        <NavLink to="/reports" style={{ textDecoration: 'none', color: 'black' }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <BarChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Reports" />
+            </ListItem>
+        </NavLink>
     </div>
 );

@@ -6,25 +6,26 @@ import 'react-dates/lib/css/_datepicker.css';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
+import Button from "@material-ui/core/Button";
+
+const initialState = {
+    title: '',
+    description: '',
+    createdAt: moment(),
+    calendarFocused: false,
+};
 
 
 export default class AddFile extends React.Component{
     constructor(props) {
         super(props);
         console.log(props);
-        this.state = {
-            title: '',
-            description: '',
-            createdAt: moment(),
-            calendarFocused: false,
-        }
+        this.state = initialState;
     }
 
     onTitleChange = (e) => {
         e.preventDefault();
-        console.log()
+        console.log();
         this.setState({title: e.target.value});
     };
 
@@ -33,10 +34,15 @@ export default class AddFile extends React.Component{
         this.setState({description: e.target.value});
     };
 
-    onDateChange = (createdAtMoment) => {
-        const createdAt = createdAtMoment.toString();
-        if (createdAt) {
-            this.setState(() => ({ createdAt }));
+    onDateChange = (createdAt) => {
+        //const createdAt = createdAtMoment.toString();
+        try {
+            console.log(createdAt);
+            if (createdAt) {
+                this.setState(() => ({ createdAt }));
+            }
+        } catch (error) {
+            console.log(error);
         }
     };
     onFocusChange = ({ focused }) => {
@@ -48,11 +54,13 @@ export default class AddFile extends React.Component{
         console.log(this.state);
         const task = {
             title: this.state.title,
-            description: this.state.task,
+            description: this.state.description,
             completeBy: this.state.createdAt
 
-        }
+        };
         this.props.onSubmit(task);
+        this.setState(initialState);
+        console.log(this.state);
     };
 
 
@@ -63,124 +71,98 @@ export default class AddFile extends React.Component{
                     Shipping address
                 </Typography>
                 <Grid container spacing={3}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                         <TextField
                             required
-                            id="firstName"
-                            name="firstName"
-                            label="First name"
+                            id="title"
+                            name="title"
+                            label="Title"
                             fullWidth
-                            autoComplete="fname"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="lastName"
-                            name="lastName"
-                            label="Last name"
-                            fullWidth
-                            autoComplete="lname"
+                            autoComplete="title"
+                            value={this.state.title}
+                            onChange={this.onTitleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
                         <TextField
                             required
-                            id="address1"
-                            name="address1"
-                            label="Address line 1"
+                            id="description"
+                            name="description"
+                            label="Description"
                             fullWidth
-                            autoComplete="billing address-line1"
+                            autoComplete="Description"
+                            value={this.state.description}
+                            onChange={this.onDescriptionChange}
+                        />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                       <div>
+                           Complete By:
+                       </div>
+                        {this.state.createdAt.format('DD/MM/YYYY').toString()}
+                        {/*<Text*/}
+                        {/*    required*/}
+                        {/*    id="firstName"*/}
+                        {/*    name="firstName"*/}
+                        {/*    label="First name"*/}
+                        {/*    fullWidth*/}
+                        {/*    autoComplete="fname"*/}
+                        {/*    onChange={this.onDescriptionChange}*/}
+                        {/*/>*/}
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                        <SingleDatePicker
+                            date={this.state.createdAt}
+                            onDateChange={this.onDateChange}
+                            focused={this.state.calendarFocused}
+                            onFocusChange={this.onFocusChange}
+                            numberOfMonths={1}
+                            isOutsideRange={() => false}
                         />
                     </Grid>
                     <Grid item xs={12}>
-                        <TextField
-                            id="address2"
-                            name="address2"
-                            label="Address line 2"
+                        <Button
                             fullWidth
-                            autoComplete="billing address-line2"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="city"
-                            name="city"
-                            label="City"
-                            fullWidth
-                            autoComplete="billing address-level2"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField id="state" name="state" label="State/Province/Region" fullWidth />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="zip"
-                            name="zip"
-                            label="Zip / Postal code"
-                            fullWidth
-                            autoComplete="billing postal-code"
-                        />
-                    </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <TextField
-                            required
-                            id="country"
-                            name="country"
-                            label="Country"
-                            fullWidth
-                            autoComplete="billing country"
-                        />
-                    </Grid>
-                    <Grid item xs={12}>
-                        <FormControlLabel
-                            control={<Checkbox color="secondary" name="saveAddress" value="yes" />}
-                            label="Use this address for payment details"
-                        />
+                            variant="contained"
+                            color="primary"
+                            onClick={this.onSubmit}
+                        >
+                            Submit
+                        </Button>
                     </Grid>
                 </Grid>
-                <Grid
-                      container
-                      direction="column"
-                      justify="space-between"
-                      alignItems="center"
-                >
-                   <Grid
-                       container
-                       direction="row"
-                       justify="space-evenly"
-                       alignItems="center"
-                   >
-                       <input
-                           type = "text"
-                           value={this.state.title}
-                           onChange={this.onTitleChange}
-                           placeholder="Task Title"
-                       />
-                       <input
-                           type = "text"
-                           value={this.state.description}
-                           onChange={this.onDescriptionChange}
-                           placeholder="Task Description"
-                       />
-                   </Grid>
-                    <SingleDatePicker
-                        date={this.state.createdAt}
-                        onDateChange={this.onDateChange}
-                        focused={this.state.calendarFocused}
-                        onFocusChange={this.onFocusChange}
-                        numberOfMonths={1}
-                        isOutsideRange={() => false}
-                    />
-                    <button
-                        onClick={this.onSubmit}
-                    >
-                        Submit
-                    </button>
-                </Grid>
+                {/*<Grid*/}
+                {/*      container*/}
+                {/*      direction="column"*/}
+                {/*      justify="space-between"*/}
+                {/*      alignItems="center"*/}
+                {/*>*/}
+                {/*   <Grid*/}
+                {/*       container*/}
+                {/*       direction="row"*/}
+                {/*       justify="space-evenly"*/}
+                {/*       alignItems="center"*/}
+                {/*   >*/}
+                {/*       <input*/}
+                {/*           type = "text"*/}
+                {/*           value={this.state.title}*/}
+                {/*           onChange={this.onTitleChange}*/}
+                {/*           placeholder="Task Title"*/}
+                {/*       />*/}
+                {/*       <input*/}
+                {/*           type = "text"*/}
+                {/*           value={this.state.description}*/}
+                {/*           onChange={this.onDescriptionChange}*/}
+                {/*           placeholder="Task Description"*/}
+                {/*       />*/}
+                {/*   </Grid>*/}
+
+                {/*    <button*/}
+                {/*        onClick={this.onSubmit}*/}
+                {/*    >*/}
+                {/*        Submit*/}
+                {/*    </button>*/}
+                {/*</Grid>*/}
             </React.Fragment>
         );
     }

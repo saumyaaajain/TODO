@@ -21,6 +21,8 @@ import { mainListItems } from './listItems';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ViewFile from "../components/ViewFile";
 import AddTaskPage from "../components/AddTaskPage";
+import {Reports} from '../components/Reports';
+import {PageNotFound} from '../components/PageNotFound';
 
 function Copyright() {
     return (
@@ -176,6 +178,8 @@ export default function Dashboard() {
                                     <Switch>
                                         <Route path="/" component={ViewFile} exact={true}/>
                                         <Route path="/add" component={AddTaskPage} exact={true}/>
+                                        <Route path="/reports" component={Reports} exact={true}/>
+                                        <Route path="/" component={PageNotFound}/>
                                     </Switch>
                                 </Grid>
                             </Grid>
