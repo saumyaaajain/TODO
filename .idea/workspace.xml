@@ -2,14 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37f70c7c-c257-4db5-a78d-b85d52967a1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/style/ViewFile.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Check/Chart.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Check/Dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Check/Deposits.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Check/Order.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Check/Title.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Check/listItems.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/actions/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddFile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/AddTaskPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTaskPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/TaskListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskListItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ViewFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/style/ViewFile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/style/ViewFile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/reducers/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/task.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/AppRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/AppRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +42,7 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -66,12 +80,15 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589564447435</updated>
-      <workItem from="1589564449951" duration="17785000" />
+      <workItem from="1589564449951" duration="30794000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="320" y="115" key="#ESLint" timestamp="1589565895522">

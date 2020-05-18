@@ -3,12 +3,28 @@ import { connect } from 'react-redux';
 import {add} from "../actions/task";
 import AddFile from "./AddFile";
 import './style/ViewFile.css';
+import Title from "../Check/Title";
+import {makeStyles} from "@material-ui/core/styles";
+import Paper from "@material-ui/core/Paper";
 
-const AddTaskPage = (props) => (
-    <div className="box">
-        <h1>Add Task</h1>
-        <div className="line" />
-        <div className="item">
+const useStyles = makeStyles((theme) => ({
+    paper:{
+        padding: theme.spacing(2),
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+        height: '75vh',
+    }
+}));
+
+const AddTaskPage = (props) => {
+    const classes = useStyles();
+    return (
+    <React.Fragment>
+        <Paper className={classes.paper}>
+            <Title>
+                Add Task
+            </Title>
             <AddFile
                 onSubmit = { (task) => {
                     console.log(task);
@@ -16,8 +32,8 @@ const AddTaskPage = (props) => (
                     //props.history.push('/');
                 }}
             />
-        </div>
-    </div>
-);
+        </Paper>
+    </React.Fragment>
+)};
 
 export default connect()(AddTaskPage);

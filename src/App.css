@@ -72,8 +72,28 @@
   flex-direction: row;
 }
 
+.centre{
+  align-content: center;
+  align-self: center;
+  margin: 0 auto;
+}
+
 .line {
   border-bottom: 1px solid;
+}
+
+.lineVer{
+  border-right: 1px solid;
+  maring: 30px;
+  padding: 30px;
+}
+
+.rightBox{
+  align-content: center;
+  width: 20vw;
+  height: 45vh;
+  border: 7px solid mediumpurple;
+  margin: 30px;
 }
 
 .Row{

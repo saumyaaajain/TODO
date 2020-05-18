@@ -10,8 +10,8 @@ const store = createStore(combineReducers({
     tasks: task,
 }));
 
-store.dispatch(add({description:'hello'}));
-store.dispatch(add({description:'task1'}));
+store.dispatch(add({title:"task 1",description:'hello'}));
+store.dispatch(add({title:'task 2',description:'task1'}));
 const state = store.getState();
 console.log(1);
 console.log(state);

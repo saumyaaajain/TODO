@@ -7,6 +7,7 @@ export default (state = defaultTaskState, action) => {
                 ...state,
                 action.task
             ];
+        case 'EDIT':
             break;
         default:
             return state;
