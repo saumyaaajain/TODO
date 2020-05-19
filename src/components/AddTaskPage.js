@@ -19,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AddTaskPage = (props) => {
     const classes = useStyles();
+    props.getTitle('ADD TASK');
     return (
     <React.Fragment>
         <Paper className={classes.paper}>

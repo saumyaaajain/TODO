@@ -1,7 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 import 'react-dates/initialize';
-import { SingleDatePicker } from 'react-dates';
+import { SingleDatePicker, DateRangePicker } from 'react-dates';
 import 'react-dates/lib/css/_datepicker.css';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -12,7 +12,11 @@ const initialState = {
     title: '',
     description: '',
     createdAt: moment(),
+    startDate: moment(),
+    endDate: moment(),
     calendarFocused: false,
+    days: 0,
+    error: '',
 };
 
 
@@ -34,42 +38,64 @@ export default class AddFile extends React.Component{
         this.setState({description: e.target.value});
     };
 
-    onDateChange = (createdAt) => {
-        //const createdAt = createdAtMoment.toString();
-        try {
-            console.log(createdAt);
-            if (createdAt) {
-                this.setState(() => ({ createdAt }));
-            }
-        } catch (error) {
-            console.log(error);
+    onDateChange = ({ startDate, endDate }) => {
+        this.setState({
+            startDate,
+            endDate,
+        });
+        if(startDate && endDate){
+            this.setState({
+                days: endDate.diff(startDate , 'days')
+            });
         }
+        console.log(this.state.startDate);
     };
     onFocusChange = ({ focused }) => {
         console.log(focused);
-        this.setState(() => ({ calendarFocused: focused }));
+        this.setState({ focused });
     };
 
     onSubmit = (e) => {
-        console.log(this.state);
-        const task = {
-            title: this.state.title,
-            description: this.state.description,
-            completeBy: this.state.createdAt
-
-        };
-        this.props.onSubmit(task);
-        this.setState(initialState);
-        console.log(this.state);
+        //console.log(this.state);
+        console.log(this.state.title.length);
+        console.log(this.state.description.length);
+        if(this.state.title.length === 0){
+            this.setState({
+                error: 'Title is mandatory!'
+            });
+        }
+        if(this.state.description.length === 0){
+            this.setState({
+                error: 'Description is mandatory'
+            });
+        }
+        if(this.state.error.length === 0){
+            this.setState({
+                error: ''
+            });
+            const task = {
+                title: this.state.title,
+                description: this.state.description,
+                completeBy: this.state.createdAt,
+                startDate: this.state.startDate,
+                endDate: this.state.endDate,
+                status: 'inProgress'
+            };
+            this.props.onSubmit(task);
+            this.setState(initialState);
+        }
     };
 
 
     render() {
         return (
             <React.Fragment>
-                <Typography variant="h6" gutterBottom>
-                    Shipping address
-                </Typography>
+                {/*<Typography variant="h6" gutterBottom>*/}
+                {/*    Add Task*/}
+                {/*</Typography>*/}
+                <div style={{color:'red'}}>
+                    {this.state.error && this.state.error}
+                </div>
                 <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <TextField
@@ -99,25 +125,19 @@ export default class AddFile extends React.Component{
                        <div>
                            Complete By:
                        </div>
-                        {this.state.createdAt.format('DD/MM/YYYY').toString()}
-                        {/*<Text*/}
-                        {/*    required*/}
-                        {/*    id="firstName"*/}
-                        {/*    name="firstName"*/}
-                        {/*    label="First name"*/}
-                        {/*    fullWidth*/}
-                        {/*    autoComplete="fname"*/}
-                        {/*    onChange={this.onDescriptionChange}*/}
-                        {/*/>*/}
+                        {this.state.startDate && this.state.startDate.format('DD/MM/YYYY').toString()} - {this.state.endDate && this.state.endDate.format('DD/MM/YYYY').toString()}
+                          ({this.state.days && this.state.days})
+
                     </Grid>
                     <Grid item xs={12} sm={6}>
-                        <SingleDatePicker
-                            date={this.state.createdAt}
-                            onDateChange={this.onDateChange}
-                            focused={this.state.calendarFocused}
-                            onFocusChange={this.onFocusChange}
-                            numberOfMonths={1}
-                            isOutsideRange={() => false}
+                        <DateRangePicker
+                            startDate={this.state.startDate}
+                            startDateId="start-date"
+                            endDate={this.state.endDate} //
+                            endDateId="end-date"
+                            onDatesChange={this.onDateChange}
+                            focusedInput={this.state.focusedInput}
+                            onFocusChange={focusedInput => this.setState({ focusedInput })}
                         />
                     </Grid>
                     <Grid item xs={12}>

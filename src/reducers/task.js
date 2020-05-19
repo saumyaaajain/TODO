@@ -7,8 +7,21 @@ export default (state = defaultTaskState, action) => {
                 ...state,
                 action.task
             ];
+        case 'REMOVE':
+            //console.log(action.id);
+            //console.log(state.filter(({ id }) => id !== action.id));
+            return state.filter(({ id }) => id !== action.id);
         case 'EDIT':
-            break;
+            return state.map((task) => {
+                if (task.id === action.id) {
+                    return {
+                        ...task,
+                        ...action.updates
+                    };
+                } else {
+                    return task;
+                }
+            });
         default:
             return state;
     }

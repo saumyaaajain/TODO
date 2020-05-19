@@ -23,6 +23,8 @@ import ViewFile from "../components/ViewFile";
 import AddTaskPage from "../components/AddTaskPage";
 import {Reports} from '../components/Reports';
 import {PageNotFound} from '../components/PageNotFound';
+//import {add} from "../actions/task";
+import TaskListFilters from "../components/TaskFilter";
 
 function Copyright() {
     return (
@@ -126,6 +128,13 @@ export default function Dashboard() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
+    let title = 'DASHBOARD';
+    const setTitle = (tte) => {
+        title = tte;
+    };
+    const getTitle = () => {
+        return title;
+    };
 //    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
     return (
@@ -144,7 +153,7 @@ export default function Dashboard() {
                             <MenuIcon />
                         </IconButton>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            Dashboard
+                            {title}
                         </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -172,12 +181,14 @@ export default function Dashboard() {
                     <div className={classes.appBarSpacer} />
                     <Container maxWidth="lg" className={classes.container}>
                             <Grid container spacing={3}>
-
-                                {/* Recent Orders */}
                                 <Grid item xs={12}>
                                     <Switch>
-                                        <Route path="/" component={ViewFile} exact={true}/>
-                                        <Route path="/add" component={AddTaskPage} exact={true}/>
+                                        <Route path="/" render={(routeProps) => <ViewFile {...routeProps} getTitle = { (title) => {
+                                            setTitle(title);
+                                        }}/>} exact={true}/>
+                                        <Route path="/add" component={(routeProps) => <AddTaskPage {...routeProps} getTitle = { (title) => {
+                                            setTitle(title);
+                                        }}/> } exact={true}/>
                                         <Route path="/reports" component={Reports} exact={true}/>
                                         <Route path="/" component={PageNotFound}/>
                                     </Switch>
