@@ -21,10 +21,8 @@ import { mainListItems } from './listItems';
 import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ViewFile from "../components/ViewFile";
 import AddTaskPage from "../components/AddTaskPage";
-import {Reports} from '../components/Reports';
+import Reports from '../components/Reports';
 import {PageNotFound} from '../components/PageNotFound';
-//import {add} from "../actions/task";
-import TaskListFilters from "../components/TaskFilter";
 
 function Copyright() {
     return (
@@ -38,7 +36,7 @@ function Copyright() {
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme) => ({
+export const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
     },
@@ -113,15 +111,26 @@ const useStyles = makeStyles((theme) => ({
         flexDirection: 'column',
     },
     fixedHeight: {
-        height: 240,
+        height: 540,
     },
+    fixedHeightCentre : {
+        alignItems: 'centre',
+        alignSelf: 'centre',
+        display: 'flex',
+        margin: 'auto',
+        flexDirection: 'column',
+        //height: 540
+    }
 }));
 
 
 
 export default function Dashboard() {
     const classes = useStyles();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
+    const [state, setState] = React.useState({
+        title:'Dashboard'
+    });
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -130,7 +139,9 @@ export default function Dashboard() {
     };
     let title = 'DASHBOARD';
     const setTitle = (tte) => {
-        title = tte;
+        if(state.title !== tte){
+            setState({title: tte});
+        }
     };
     const getTitle = () => {
         return title;
@@ -153,7 +164,7 @@ export default function Dashboard() {
                             <MenuIcon />
                         </IconButton>
                         <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            {title}
+                            {state.title}
                         </Typography>
                         <IconButton color="inherit">
                             <Badge badgeContent={4} color="secondary">
@@ -189,12 +200,14 @@ export default function Dashboard() {
                                         <Route path="/add" component={(routeProps) => <AddTaskPage {...routeProps} getTitle = { (title) => {
                                             setTitle(title);
                                         }}/> } exact={true}/>
-                                        <Route path="/reports" component={Reports} exact={true}/>
+                                        <Route path="/report" render={(routeProps) => <Reports {...routeProps} getTitle = { (title) => {
+                                            setTitle(title);
+                                        }}/>} exact={true}/>
                                         <Route path="/" component={PageNotFound}/>
                                     </Switch>
                                 </Grid>
                             </Grid>
-                        <Box pt={40}>
+                        <Box pt={5}>
                             <Copyright />
                         </Box>
                     </Container>

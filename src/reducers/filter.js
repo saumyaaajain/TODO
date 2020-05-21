@@ -4,7 +4,7 @@ const filtersReducerDefaultState = {
     text: '',
     sortBy: 'date',
     completeBy: undefined,
-    status: 'None',
+    status: 'none',
 };
 
 export default (state = filtersReducerDefaultState, action) => {
@@ -29,6 +29,16 @@ export default (state = filtersReducerDefaultState, action) => {
                 ...state,
                 sortBy: 'end-date'
             };
+        case 'SORT_BY_NONE':
+            return {
+                ...state,
+                sortBy: 'none'
+            };
+        case 'FILTER_NOT_STARTED':
+            return {
+                ...state,
+                status: 'not-started'
+            };
         case 'FILTER_IN_PROGRESS':
             return {
                 ...state,
@@ -38,6 +48,11 @@ export default (state = filtersReducerDefaultState, action) => {
             return {
                 ...state,
                 status: 'completed'
+            };
+        case 'FILTER_NONE':
+            return {
+                ...state,
+                status: 'none'
             };
         default:
             return state;

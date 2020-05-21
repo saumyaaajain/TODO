@@ -1,21 +1,22 @@
 import uuid from 'react-uuid';
+import moment from "moment";
 
 export const add = (
     {
         title='',
         description='',
-        completeBy=0,
-        startDate=0,
-        endDate=0,
+        createdAt=moment.now(),
+        startDate=moment.now(),
+        endDate=moment.now(),
         days=0,
-        status = 'inProgress'
+        status = 'in-progress'
     } ={} ) => ({
     type: 'ADD',
     task:{
         id: uuid(),
         title,
         description,
-        completeBy,
+        createdAt,
         startDate,
         endDate,
         days,

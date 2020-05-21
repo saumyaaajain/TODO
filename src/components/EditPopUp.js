@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import Title from "../Check/Title";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -10,6 +11,9 @@ import Slide from '@material-ui/core/Slide';
 import Grid from "@material-ui/core/Grid";
 import {DateRangePicker} from "react-dates";
 import {edit} from '../actions/task';
+import { Alert, AlertTitle } from '@material-ui/lab';
+import CheckIcon from '@material-ui/icons/Check';
+import CheckBox from "./CheckBox";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
@@ -17,6 +21,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function AlertDialogSlide(props) {
     const [open, setOpen] = React.useState(false);
+    const [status, setStatus] = React.useState({status: props.task.status})
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -64,39 +69,26 @@ export default function AlertDialogSlide(props) {
             <Dialog
                 open={open}
                 TransitionComponent={Transition}
+                fullWidth={true}
                 keepMounted
                 onClose={handleClose}
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description"
             >
-                <DialogTitle id="alert-dialog-slide-title">{"Use Google's location service?"}</DialogTitle>
+                {props.task.status === 'completed' && <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                    Task Completed
+                </Alert>}
+                <DialogTitle id="alert-dialog-slide-title">
+                    <Title>{props.task.title}</Title>
+                </DialogTitle>
+                <DialogTitle>
+                    {props.task.description}
+                </DialogTitle>
                 <DialogContent>
-                    <Grid container spacing={3}>
-                        <Grid item xs={12}>
-                            <TextField
-                                required
-                                id="title"
-                                name="title"
-                                label="Title"
-                                fullWidth
-                                autoComplete="title"
-                                value={props.task.title}
-                                onChange={onTitleChange}
-                            />
-                        </Grid>
-                        <Grid item xs={12}>
-                            <TextField
-                                required
-                                id="description"
-                                name="description"
-                                label="Description"
-                                fullWidth
-                                autoComplete="Description"
-                                value={props.task.description}
-                                onChange={onDescriptionChange}
-                            />
-                        </Grid>
-                    </Grid>
+                    <CheckBox {...props} onStatusChange = {(stat) => {
+                        console.log(stat);
+                        setStatus({status: stat});
+                    }}/>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">

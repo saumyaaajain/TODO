@@ -16,6 +16,7 @@ const initialState = {
     endDate: moment(),
     calendarFocused: false,
     days: 0,
+    status: 'in-progress',
     error: '',
 };
 
@@ -56,9 +57,6 @@ export default class AddFile extends React.Component{
     };
 
     onSubmit = (e) => {
-        //console.log(this.state);
-        console.log(this.state.title.length);
-        console.log(this.state.description.length);
         if(this.state.title.length === 0){
             this.setState({
                 error: 'Title is mandatory!'
@@ -69,17 +67,23 @@ export default class AddFile extends React.Component{
                 error: 'Description is mandatory'
             });
         }
+        const today = moment.now();
+        if(this.state.startDate.diff(today, 'days') > 0){
+            this.setState({status: 'not-started'})
+            console.log('not');
+        }
         if(this.state.error.length === 0){
             this.setState({
                 error: ''
             });
+            console.log(this.state.status);
             const task = {
                 title: this.state.title,
                 description: this.state.description,
-                completeBy: this.state.createdAt,
+                createdAt: this.state.createdAt,
                 startDate: this.state.startDate,
                 endDate: this.state.endDate,
-                status: 'inProgress'
+                status: this.state.startDate.diff(today, 'days') > 0 ? 'not-started' : 'in-progress',
             };
             this.props.onSubmit(task);
             this.setState(initialState);

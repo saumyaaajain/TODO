@@ -15,7 +15,8 @@ import selectTasks from '../selectors/task';
 import {add, edit, remove} from "../actions/task";
 import TaskListFilters from "./TaskFilter";
 import EditPopUp from "./EditPopUp";
-import AddFile from "./AddFile";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import './style/ViewFile.css'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -31,12 +32,15 @@ const useStyles = makeStyles((theme) => ({
 
 const ViewFile = (props) => {
     const classes = useStyles();
+    //console.log(props);
     props.getTitle('VIEW TASK');
   return (
       <React.Fragment>
           <Paper className={classes.paper}>
               <Title>Filters: </Title>
               <TaskListFilters/>
+              <CssBaseline />
+              <div className='line'/>
               <Table size="small">
                   <TableHead>
                       <TableRow>
@@ -65,6 +69,11 @@ const ViewFile = (props) => {
                                   Days
                               </Title>
                           </TableCell>
+                          <TableCell>
+                              <Title>
+                                  Status
+                              </Title>
+                          </TableCell>
                           <TableCell align="right">
                               <Title>
                                   Actions
@@ -77,9 +86,10 @@ const ViewFile = (props) => {
                           <TableRow key={tsk.id}>
                               <TableCell>{tsk.title}</TableCell>
                               <TableCell>{tsk.description}</TableCell>
-                              <TableCell>{tsk.startDate.toString()}</TableCell>
-                              <TableCell>{tsk.startDate.toString()}</TableCell>
+                              <TableCell>{tsk.startDate.format('DD/MM/YYYY').toString()}</TableCell>
+                              <TableCell>{tsk.startDate.format('DD/MM/YYYY').toString()}</TableCell>
                               <TableCell>{tsk.days}</TableCell>
+                              <TableCell>{tsk.status.toUpperCase()}</TableCell>
                               <TableCell align="right">
                                   <EditPopUp {...props} task={tsk}/>
                                   <Button

@@ -1,13 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {setStartDate, setEndDate, setTextFilter, sortByDate, filterInProgress, filterCompleted} from '../actions/filter';
+import {
+    sortByStartDate,
+    sortByEndDate,
+    setTextFilter,
+    sortByDate,
+    filterInProgress,
+    filterCompleted,
+    filterNone, sortByNone, filterNotStarted
+} from '../actions/filter';
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import MenuItem from '@material-ui/core/MenuItem';
-import {DateRangePicker} from "react-dates";
 
-const TaskListFilters = (props) => (
+const TaskListFilters = (props) => {
+    //console.log(props);
+    //console.log(props.sortBy);
+    //console.log(props.status);
+    return (
     <div>
         <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
@@ -34,11 +45,11 @@ const TaskListFilters = (props) => (
                             //console.log(props);
                             props.dispatch(sortByDate());
                         } else if(e.target.value === 'start-date'){
-                            props.dispatch(setStartDate());
+                            props.dispatch(sortByStartDate());
                         } else if(e.target.value === 'end-date'){
-                            props.dispatch(setEndDate());
+                            props.dispatch(sortByEndDate());
                         } else if(e.target.value === 'none'){
-
+                            props.dispatch(sortByNone());
                         }
                     }}
                 >
@@ -55,25 +66,28 @@ const TaskListFilters = (props) => (
                     id="select1"
                     value={props.filters.status}
                     onChange={(e) => {
-                        if(e.target.value === 'inProgress'){
+                        if(e.target.value === 'in-progress'){
                             props.dispatch(filterInProgress());
                         } else if(e.target.value === 'completed'){
                             props.dispatch(filterCompleted());
                         } else if(e.target.value === 'none'){
-
+                            props.dispatch(filterNone());
+                        } else if(e.target.value === 'not-started'){
+                            props.dispatch(filterNotStarted());
                         }
                     }}
                 >
                     <MenuItem value="none">None</MenuItem>
-                    <MenuItem value="inProgress">In Progress</MenuItem>
-                    <MenuItem value="Completed">Completed</MenuItem>
+                    <MenuItem value="not-started">Not Started</MenuItem>
+                    <MenuItem value="in-progress">In Progress</MenuItem>
+                    <MenuItem value="completed">Completed</MenuItem>
                 </Select>
 
             </Grid>
         </Grid>
 
     </div>
-);
+)};
 
 const mapStateToProps = (state) => {
     //console.log(state);
