@@ -10,27 +10,28 @@ import Checkbox from '@material-ui/core/Checkbox';
 export default function CheckboxesGroup(props) {
     console.log(props);
     const classes = useStyles();
-    const [state, setState] = React.useState({
+    const [state, setState] = React.useState([{
         c: props.task.status === 'completed',
         b: props.task.status === 'in-progress',
         a: props.task.status === 'not-started',
-    });
+    }]);
 
     const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-        console.log(state);
-        console.log(event.target);
-        if(state.a){
+        const newState = Object.assign({},  {...state[0], [event.target.name]: event.target.checked })
+        setState([newState])
+        // setState([{state, [event.target.name]: event.target.checked}]);
+        if(newState.a){
             props.onStatusChange('Not-Started');
-        } else if(state.b){
+        } else if(newState.b){
             props.onStatusChange('In Progress');
-        } else if(state.c){
+        } else if(newState.c){
             props.onStatusChange('Completed');
         }
 
     };
 
-    const { a, b, c } = state;
+    const { a, b, c } = state[0];
+    let anySelected = [a, b, c].some((a) => a === true)
     const error = [a, b, c].filter((v) => v).length !== 1;
 
     return (
@@ -38,15 +39,15 @@ export default function CheckboxesGroup(props) {
             <FormControl required error={error} component="fieldset" className={classes.formControl}>
                 <FormGroup>
                     <FormControlLabel
-                        control={<Checkbox checked={a} onChange={handleChange} name="a" />}
+                        control={<Checkbox disabled={anySelected && !a} checked={a} onChange={handleChange} name="a" />}
                         label="Not Started"
                     />
                     <FormControlLabel
-                        control={<Checkbox checked={b} onChange={handleChange} name="b" />}
+                        control={<Checkbox disabled={anySelected && !b} checked={b} onChange={handleChange} name="b" />}
                         label="In Progress"
                     />
                     <FormControlLabel
-                        control={<Checkbox checked={c} onChange={handleChange} name="c" />}
+                        control={<Checkbox disabled={anySelected && !c} checked={c} onChange={handleChange} name="c" />}
                         label="Completed"
                     />
                 </FormGroup>

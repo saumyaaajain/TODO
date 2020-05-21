@@ -3,19 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="37f70c7c-c257-4db5-a78d-b85d52967a1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddTaskPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTaskPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/CheckBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CheckBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditPopUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditPopUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/PageNotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PageNotFound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Reports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Reports.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ViewFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/style/AddTaskPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/AddTaskPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/style/CheckBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/CheckBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/style/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/style/PageNotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/PageNotFound.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/style/ViewFile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/ViewFile.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/style/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/ViewFile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,21 +19,24 @@
   </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.standard" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.standard" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.standard" value="$USER_HOME$/.nvm/versions/node/v12.11.1/lib/node_modules/standard" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="yarn" />
   </component>
@@ -73,18 +64,6 @@
       <method v="2" />
     </configuration>
   </component>
-  <component name="ServiceViewManager">
-    <option name="viewStates">
-      <list>
-        <serviceView>
-          <treeState>
-            <expand />
-            <select />
-          </treeState>
-        </serviceView>
-      </list>
-    </option>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -96,11 +75,12 @@
       <option name="presentableId" value="Default" />
       <updated>1589564447435</updated>
       <workItem from="1589564449951" duration="80746000" />
+      <workItem from="1590061481360" duration="2805000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
