@@ -1,18 +1,8 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import {useStyles} from "./style/PageNotFound";
 import Grid from '@material-ui/core/Grid';
 import WarningIcon from '@material-ui/icons/Warning';
 import Paper from '@material-ui/core/Paper';
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        flexGrow: 1,
-    },
-    paper: {
-        height: 540,
-        padding: theme.spacing(2),
-    },
-}));
 
 export function PageNotFound() {
     const [spacing, setSpacing] = React.useState(2);

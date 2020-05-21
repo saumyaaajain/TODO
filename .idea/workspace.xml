@@ -2,8 +2,27 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37f70c7c-c257-4db5-a78d-b85d52967a1b" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/components/Copyright.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/style/AddTaskPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/style/CheckBox.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/style/Dashboard.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/style/PageNotFound.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/style/ViewFile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Check/Chart.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Check/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Check/Deposits.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Check/Order.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Check/Title.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Title.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Check/listItems.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/listItems.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddTaskPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTaskPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CheckBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CheckBox.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/EditPopUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditPopUp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/PageNotFound.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/PageNotFound.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Reports.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Reports.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/TaskFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskFilter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ViewFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/router/AppRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/AppRouter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +57,9 @@
     <property name="nodejs_package_manager_path" value="yarn" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/images" />
     </key>
@@ -79,7 +101,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1589564447435</updated>
-      <workItem from="1589564449951" duration="78429000" />
+      <workItem from="1589564449951" duration="79946000" />
     </task>
     <servers />
   </component>

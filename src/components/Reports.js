@@ -1,8 +1,8 @@
 import React from 'react';
 import Paper from "@material-ui/core/Paper";
-import {useStyles} from "../Check/Dashboard";
+import {useStyles} from "./style/Dashboard";
 import List from "@material-ui/core/List";
-import TitleHeading from '../Check/Title';
+import TitleHeading from './Title';
 import Grid from "@material-ui/core/Grid";
 import clsx from 'clsx';
 import { Stack } from '@devexpress/dx-react-chart';

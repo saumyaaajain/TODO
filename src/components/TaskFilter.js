@@ -15,9 +15,6 @@ import Select from "@material-ui/core/Select";
 import MenuItem from '@material-ui/core/MenuItem';
 
 const TaskListFilters = (props) => {
-    //console.log(props);
-    //console.log(props.sortBy);
-    //console.log(props.status);
     return (
     <div>
         <Grid container spacing={3}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import '../App.css';
-import Dashboard from "../Check/Dashboard";
+import Dashboard from "../components/Dashboard";
 
 function AppRouter() {
     return (
