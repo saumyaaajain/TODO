@@ -6,7 +6,6 @@ It is a TODO app for you to manage your time efficiently. It is a software in th
 <br/> Happy TODO-ing
 
 ## Images
-![img](/images/1.png)
 ![img](images/2.png)
 ![img](images/3.png)
 ![img](images/4.png)
