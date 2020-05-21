@@ -200,7 +200,7 @@ export default function Dashboard() {
                                         <Route path="/add" component={(routeProps) => <AddTaskPage {...routeProps} getTitle = { (title) => {
                                             setTitle(title);
                                         }}/> } exact={true}/>
-                                        <Route path="/report" render={(routeProps) => <Reports {...routeProps} getTitle = { (title) => {
+                                        <Route path="/reports" render={(routeProps) => <Reports {...routeProps} getTitle = { (title) => {
                                             setTitle(title);
                                         }}/>} exact={true}/>
                                         <Route path="/" component={PageNotFound}/>
