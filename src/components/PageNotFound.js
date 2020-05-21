@@ -1,5 +1,5 @@
 import React from 'react';
-import {useStyles} from "./style/PageNotFound";
+import {useStyles} from "../style/PageNotFound";
 import Grid from '@material-ui/core/Grid';
 import WarningIcon from '@material-ui/icons/Warning';
 import Paper from '@material-ui/core/Paper';

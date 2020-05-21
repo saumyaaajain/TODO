@@ -1,5 +1,5 @@
 import React from 'react';
-import {useStyles} from "./style/CheckBox";
+import {useStyles} from "../style/CheckBox";
 import FormControl from '@material-ui/core/FormControl';
 import FormGroup from '@material-ui/core/FormGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -18,6 +18,8 @@ export default function CheckboxesGroup(props) {
 
     const handleChange = (event) => {
         setState({ ...state, [event.target.name]: event.target.checked });
+        console.log(state);
+        console.log(event.target);
         if(state.a){
             props.onStatusChange('Not-Started');
         } else if(state.b){

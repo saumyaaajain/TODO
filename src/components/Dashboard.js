@@ -21,7 +21,7 @@ import ViewFile from "./ViewFile";
 import AddTaskPage from "./AddTaskPage";
 import Reports from './Reports';
 import {PageNotFound} from './PageNotFound';
-import {useStyles} from "./style/Dashboard";
+import {useStyles} from "../style/Dashboard";
 import Copyright from "./Copyright";
 
 export default function Dashboard() {

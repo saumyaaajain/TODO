@@ -4,14 +4,10 @@ import Title from "./Title";
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import TextField from "@material-ui/core/TextField";
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import Grid from "@material-ui/core/Grid";
-import {DateRangePicker} from "react-dates";
 import {edit} from '../actions/task';
-import { Alert, AlertTitle } from '@material-ui/lab';
+import { Alert } from '@material-ui/lab';
 import CheckIcon from '@material-ui/icons/Check';
 import CheckBox from "./CheckBox";
 

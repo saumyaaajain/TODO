@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux';
-import './style/ViewFile.css';
+import '../style/ViewFile.css';
 import Button from "@material-ui/core/Button";
 import Paper from '@material-ui/core/Paper';
 import Title from "./Title";
@@ -15,8 +15,8 @@ import {add, edit, remove} from "../actions/task";
 import TaskListFilters from "./TaskFilter";
 import EditPopUp from "./EditPopUp";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import './style/ViewFile.css'
-import {useStyles} from "./style/ViewFile";
+import '../style/ViewFile.css'
+import {useStyles} from "../style/ViewFile";
 
 const ViewFile = (props) => {
     const classes = useStyles();

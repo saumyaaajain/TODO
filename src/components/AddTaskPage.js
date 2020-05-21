@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import {add} from "../actions/task";
 import AddFile from "./AddFile";
-import './style/ViewFile.css';
+import '../style/ViewFile.css';
 import Title from "./Title";
-import {useStyles} from "./style/AddTaskPage";
+import {useStyles} from "../style/AddTaskPage";
 import Paper from "@material-ui/core/Paper";
 
 
