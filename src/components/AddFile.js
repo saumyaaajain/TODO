@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
+import Timekeeper from 'react-timekeeper';
 
 const initialState = {
     title: '',
@@ -18,6 +19,7 @@ const initialState = {
     days: 0,
     status: 'in-progress',
     error: '',
+    time: '10:00',
 };
 
 
@@ -55,6 +57,10 @@ export default class AddFile extends React.Component{
         console.log(focused);
         this.setState({ focused });
     };
+
+    onChange = (time) =>{
+        console.log(time);
+    }
 
     onSubmit = (e) => {
         if(this.state.title.length === 0){
@@ -97,6 +103,12 @@ export default class AddFile extends React.Component{
                 {/*<Typography variant="h6" gutterBottom>*/}
                 {/*    Add Task*/}
                 {/*</Typography>*/}
+                <div>
+                    <Timekeeper
+                        time={this.state.time}
+                        onChange={this.onChange}
+                    />
+                </div>
                 <div style={{color:'red'}}>
                     {this.state.error && this.state.error}
                 </div>

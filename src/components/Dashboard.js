@@ -23,6 +23,7 @@ import Reports from './Reports';
 import {PageNotFound} from './PageNotFound';
 import {useStyles} from "../style/Dashboard";
 import Copyright from "./Copyright";
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 export default function Dashboard() {
     const classes = useStyles();
@@ -36,14 +37,10 @@ export default function Dashboard() {
     const handleDrawerClose = () => {
         setOpen(false);
     };
-    let title = 'DASHBOARD';
     const setTitle = (tte) => {
         if(state.title !== tte){
             setState({title: tte});
         }
-    };
-    const getTitle = () => {
-        return title;
     };
 //    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
@@ -66,9 +63,7 @@ export default function Dashboard() {
                             {state.title}
                         </Typography>
                         <IconButton color="inherit">
-                            <Badge badgeContent={4} color="secondary">
-                                <NotificationsIcon />
-                            </Badge>
+                            <ExitToAppIcon/>
                         </IconButton>
                     </Toolbar>
                 </AppBar>
