@@ -12,7 +12,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Link from "@material-ui/core/Link";
 import selectTasks from '../selectors/task';
-import {add, edit, remove} from "../actions/task";
+import {add, addTask, edit, remove, removeTaskList} from "../actions/task";
 import TaskListFilters from "./TaskFilter";
 import EditPopUp from "./EditPopUp";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -31,88 +31,217 @@ import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import {mainListItems} from "./listItems";
 import Drawer from "@material-ui/core/Drawer";
+import {Switch, Route, NavLink} from "react-router-dom";
+import AddTaskPage from "./AddTaskPage";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemIcon from "@material-ui/core/ListItemIcon";
+import DashboardIcon from "@material-ui/icons/Dashboard";
+import ListItemText from "@material-ui/core/ListItemText";
+import NoteAddIcon from '@material-ui/icons/NoteAdd';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
+import { positions } from '@material-ui/system';
+import FindInPageIcon from '@material-ui/icons/FindInPage';
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
+import Tooltip from '@material-ui/core/Tooltip';
+import DeleteSweepIcon from '@material-ui/icons/DeleteSweep';
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
+import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
+import AssignmentIcon from '@material-ui/icons/Assignment';
+import AddIcon from '@material-ui/icons/Add';
+import {AddTaskDetails} from "./AddTask";
 
 const ViewFile = (props) => {
     const classes = useStyles();
     console.log(props);
+    const [searchPageVisible, setState] = React.useState(false);
+    const [title, setTask] = React.useState( '');
+    const [id, setId] = React.useState('');
     props.getTitle('VIEW TASK');
+    const onSubmit = (task) => {
+        console.log(task);
+    };
+
+    //drawer
     const [open, setOpen] = React.useState(false);
-    const handleDrawerOpen = () => {
+    const handleDrawerOpen = (id) => {
         setOpen(true);
+        setId(id);
     };
     const handleDrawerClose = () => {
         setOpen(false);
     };
+
+    //Checkbox
+    const [checkboxValue, setCheckbox] = React.useState({
+        check:false
+    });
+
+    const handleChange = (event, listId ,taskId) => {
+        setCheckbox({ ...checkboxValue, [event.target.name]: event.target.checked });
+        props.dispatch(edit(listId, taskId, {status: "completed"}));
+    };
+    const onAddTaskChange = (e) => {
+        // console.log(e.target.value);
+        setTask( e.target.value);
+    };
+    const onDelete = (id) => {
+        console.log("som");
+        console.log(id);
+        props.dispatch(removeTaskList(id));
+    };
+    const onSearchOpen = () => {
+        setState(true);
+    };
+    const onSearchClose = () => {
+        setState(false);
+    };
   return (
       <React.Fragment>
-          <Grid item xs={12}>
-              <Grid container justify="center" spacing={3}>
-                  {[0, 1, 2].map((value) => (
-                      <Grid key={value} item>
-                          <Paper className={classes.paper} />
-                      </Grid>
-                  ))}
-                  <Paper className={classes.paper}>
-                      <Table size="small">
-                          <TableBody>
-                              {props.task.map((tsk) => (
-                                  <TableRow key={tsk.id}>
-                                      <TableCell>{tsk.title}</TableCell>
-                                      <TableCell>{tsk.description}</TableCell>
-                                  </TableRow>
-                              ))}
-                          </TableBody>
-                      </Table>
-                  </Paper>
-                  <Grid container
-                        justify="center"
-                        spacing={4}
-                  >
-                      <Paper className={classes.paper}>
+         <div className={classes.bodyContent}>
+             <Grid item xs={12}>
+                 <Grid container justify="space-between">
+                     {/*<Paper className={classes.paperFilter} elevation={5}>*/}
+                     {/*    Filter*/}
+                     {/*</Paper>*/}
+                     Filters:
+                     {
+                         searchPageVisible
+                             ? <Tooltip title="Close Filters"><IconButton onClick={onSearchClose}><CancelPresentationIcon/></IconButton></Tooltip>
+                             : <Tooltip title="Open Filters" ><IconButton onClick={onSearchOpen}><FindInPageIcon/></IconButton></Tooltip>
+                     }
+                 </Grid>
+                 {searchPageVisible && <Paper className={classes.paper}><TaskListFilters/></Paper>}
+                 <Grid container justify="space-evenly" spacing={3}>
+                     {props.taskLists.map((list) => (
+                         <Grid key={list.id} item>
+                             <Paper className={classes.paperTitle} elevation={5}>
+                                 <Grid key={list.id} justify="space-between" container>
+                                     <div className={classes.title}>{list.title}</div>
+                                     <Tooltip title="Delete this list">
+                                         <IconButton
+                                             key={list.id}
+                                             onClick={() => onDelete(list.id)}
+                                         >
+                                      <span className={classes.deleteButton}>
+                                          <DeleteSweepIcon />
+                                          <DeleteForeverIcon className={classes.sweepButton}/>
+                                      </span>
+                                         </IconButton>
+                                     </Tooltip>
+                                 </Grid>
+                             </Paper>
+                             <Paper className={classes.paperTaskList} elevation={5}>
+                                 {list.tasks.length > 0
+                                     ? <Table size="small">
+                                         <TableBody>
+                                             {list.tasks.map((tsk) => (
+                                                 <TableRow >
+                                                     <TableCell>
+                                                         <FormControlLabel
+                                                            control={
+                                                                <Checkbox
+                                                                    checked={tsk.status==='completed'}
+                                                                    onChange={(e) => handleChange(e,list.id ,tsk.id)}
+                                                                    icon={<AssignmentIcon />}
+                                                                    checkedIcon={<AssignmentTurnedInIcon/>}
+                                                                    color='primary'
+                                                                    name={tsk.id} />
+                                                            }
+                                                            label={tsk.title}
+                                                        /></TableCell>
+                                                     <TableCell>{tsk.description}</TableCell>
+                                                 </TableRow>
+                                             ))}
 
-                      </Paper>
-                  </Grid>
-              </Grid>
-              <Grid container
-                    justify="center"
-                    spacing={5}
-              >
-                  <Grid item>
-                      <IconButton
-                          edge="end"
-                          color="inherit"
-                          aria-label="open drawer"
-                          onClick={handleDrawerOpen}
-                          className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-                      >
-                          <MenuIcon />
-                      </IconButton>
-                      <Drawer
-                          variant="persistent"
-                          anchor="right"
-                          classes={{
-                              paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                          }}
-                          open={open}
-                      >
-                          <div className={classes.toolbarIcon}>
-                              <IconButton onClick={handleDrawerClose}>
-                                  <ChevronLeftIcon />
-                              </IconButton>
-                          </div>
-                          <Divider />
-                          <List>{mainListItems}</List>
-                      </Drawer>
-                  </Grid>
-              </Grid>
-          </Grid>
+                                         </TableBody>
+                                     </Table>
+                                     : "No Data"
+                                 }
+                                 <Grid justify="space-between" container>
+                                     <TextField
+                                         required
+                                         id="title"
+                                         name="title"
+                                         label="Title"
+                                         autoComplete="title"
+                                         onChange={onAddTaskChange}
+
+                                     />
+                                     <Tooltip title="Open drawer">
+                                         <IconButton
+                                             variant="contained"
+                                             color="primary"
+                                             position="bottom"
+                                             // className={classes.addButton}
+                                             onClick={() => handleDrawerOpen(list.id)}
+                                         >
+                                             <AddIcon/>
+                                         </IconButton>
+                                     </Tooltip>
+                                 </Grid>
+                             </Paper>
+                         </Grid>
+
+                     ))}
+                     <Grid item>
+                         <Paper className={classes.paperTitle} elevation={5}>
+                             Add List
+                         </Paper>
+                         <Paper className={classes.paper} elevation={7}>
+                             <NavLink to={{
+                                 pathname:"/add",
+                                 aboutProps: {id: null}
+                             }} exact={true} style={{ textDecoration: 'none', color: 'black' }} >
+                                 <Tooltip title="Add a new task list">
+                                     <NoteAddIcon/>
+                                 </Tooltip>
+                             </NavLink>
+                         </Paper>
+                     </Grid>
+                 </Grid>
+             </Grid>
+             <div>
+                 <Drawer
+                     variant="persistent"
+                     anchor="right"
+                     classes={{
+                         paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+                     }}
+                     open={open}
+                 >
+
+                     <Grid container justify="space-between">
+                         <div className={classes.drawerContent}>Add Task Details</div>
+                         <div className={classes.toolbarIcon}>
+                             <IconButton onClick={handleDrawerClose}>
+                                 <ChevronLeftIcon />
+                             </IconButton>
+                         </div>
+                     </Grid>
+                     <Divider />
+                     <AddTaskDetails
+                        onSubmit = {(tsk) => {
+                            const task = {
+                                title: title,
+                                ...tsk
+                            };
+                            props.dispatch(addTask(id, task));
+                        }}
+                     />
+                 </Drawer>
+             </div>
+         </div>
       </React.Fragment>
   );
 };
 
 const mapStateToProps = (state) => {
+    console.log(state);
+    console.log((state.filters));
     return {
-        task: selectTasks(state.tasks, state.filters)
+        taskLists: selectTasks(state.taskLists, state.filters)
     }
 };
 

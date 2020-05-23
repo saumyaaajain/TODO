@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {add} from "../actions/task";
+import {addTaskList} from "../actions/task";
 import AddFile from "./AddFile";
 import '../style/ViewFile.css';
 import Title from "./Title";
@@ -18,10 +18,10 @@ const AddTaskPage = (props) => {
                 Add Task
             </Title>
             <AddFile
-                onSubmit = { (task) => {
-                    console.log(task);
-                    props.dispatch(add(task));
-                    //props.history.push('/');
+                onSubmit = { (taskList) => {
+                    console.log(taskList);
+                    props.dispatch(addTaskList(taskList));
+                    props.location && props.history.push('/');
                 }}
             />
         </Paper>

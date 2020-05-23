@@ -3,11 +3,68 @@ import {makeStyles} from "@material-ui/core/styles";
 const drawerWidth = 240;
 
 export const useStyles = makeStyles((theme) => ({
+    bodyContent : {
+        display: 'flex',
+        flexDirection: 'row',
+    },
     paper: {
-        padding: theme.spacing(2),
+        padding: theme.spacing(4),
         display: 'flex',
         overflow: 'auto',
-        flexDirection: 'column'
+        flexDirection: 'column',
+        //width: '200px'
+        margin: '10px',
+    },
+    paperFilter: {
+        padding: theme.spacing(4),
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+        width: '50vw',
+        height: '15px',
+        margin: '10px',
+        alignItems: 'center',
+        background: "#3f51b5",
+        color: "white",
+        ...theme.mixins.toolbar,
+    },
+    paperTaskList: {
+        padding: theme.spacing(4),
+        display: 'flex',
+        overflow: 'auto',
+        flexDirection: 'column',
+        // height: '400px',
+        // width: '200px',
+        margin: '10px',
+    },
+    paperTitle: {
+        padding: theme.spacing(2),
+        display: 'flex',
+        // overflow: 'auto',
+        flexDirection: 'column',
+        margin: '10px',
+        background: "#3f51b5",
+        color: "white",
+        ...theme.mixins.toolbar,
+        alignItems: "centre",
+        fontHeight: "20px",
+        height: '7px'
+    },
+    addButton: {
+        marginTop: "-250px"
+    },
+    deleteButton : {
+        color: 'white',
+        '&:hover > svg':{
+            display: 'none'
+        },
+        '&:hover > svg + svg':{
+            display: 'inherit'
+        },
+    },
+    sweepButton : {
+        color: 'white',
+        display: 'none',
     },
     pad: {
         padding: theme.spacing(3)
@@ -28,7 +85,11 @@ export const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         position: 'relative',
         whiteSpace: 'nowrap',
-        width: drawerWidth,
+        marginRight: '-75px',
+        marginTop: '-25px',
+        padding: '12px',
+        // width: drawerWidth,
+        height: '100vh',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
@@ -72,4 +133,7 @@ export const useStyles = makeStyles((theme) => ({
     menuButtonHidden: {
         display: 'none',
     },
+    drawerContent: {
+        padding: '32px',
+    }
 }));

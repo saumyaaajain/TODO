@@ -60,7 +60,7 @@ export default class AddFile extends React.Component{
 
     onChange = (time) =>{
         console.log(time);
-    }
+    };
 
     onSubmit = (e) => {
         if(this.state.title.length === 0){
@@ -103,12 +103,7 @@ export default class AddFile extends React.Component{
                 {/*<Typography variant="h6" gutterBottom>*/}
                 {/*    Add Task*/}
                 {/*</Typography>*/}
-                <div>
-                    <Timekeeper
-                        time={this.state.time}
-                        onChange={this.onChange}
-                    />
-                </div>
+
                 <div style={{color:'red'}}>
                     {this.state.error && this.state.error}
                 </div>
@@ -167,38 +162,6 @@ export default class AddFile extends React.Component{
                         </Button>
                     </Grid>
                 </Grid>
-                {/*<Grid*/}
-                {/*      container*/}
-                {/*      direction="column"*/}
-                {/*      justify="space-between"*/}
-                {/*      alignItems="center"*/}
-                {/*>*/}
-                {/*   <Grid*/}
-                {/*       container*/}
-                {/*       direction="row"*/}
-                {/*       justify="space-evenly"*/}
-                {/*       alignItems="center"*/}
-                {/*   >*/}
-                {/*       <input*/}
-                {/*           type = "text"*/}
-                {/*           value={this.state.title}*/}
-                {/*           onChange={this.onTitleChange}*/}
-                {/*           placeholder="Task Title"*/}
-                {/*       />*/}
-                {/*       <input*/}
-                {/*           type = "text"*/}
-                {/*           value={this.state.description}*/}
-                {/*           onChange={this.onDescriptionChange}*/}
-                {/*           placeholder="Task Description"*/}
-                {/*       />*/}
-                {/*   </Grid>*/}
-
-                {/*    <button*/}
-                {/*        onClick={this.onSubmit}*/}
-                {/*    >*/}
-                {/*        Submit*/}
-                {/*    </button>*/}
-                {/*</Grid>*/}
             </React.Fragment>
         );
     }

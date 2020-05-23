@@ -179,8 +179,9 @@ const Reports = (props) => {
 
 
 const mapStateToProps = (state) => {
+    console.log(state.data);
     return {
-        data: getData(state.tasks)
+        data: getData(state.taskLists)
     }
 };
 

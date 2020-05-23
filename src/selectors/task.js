@@ -1,61 +1,79 @@
 // Get visible expenses
 import moment from "moment";
+import uuid from 'react-uuid';
 
-export default (tasks, { text, sortBy, status }) => {
+export default (taskLists, { text, sortBy, status }) => {
     console.log("st:");
      console.log(status);
     //console.log(tasks);
-    const taskArray = tasks.filter((task) => {
-        // console.log("t:")
-        // console.log(title);
-        const textMatch = task.title.toLowerCase().includes(text.toLowerCase());
+    const taskListArray = [];
 
-        return textMatch;
-    }).sort((a, b) => {
-        if(sortBy === 'none'){
-            return 1;
+    taskLists.map((task) => {
+        const taskArray = task.taskList.filter((task) => {
+            // console.log("t:")
+            // console.log(title);
+            const textMatch = task.title.toLowerCase().includes(text.toLowerCase());
+
+            return textMatch;
+        }).sort((a, b) => {
+            if(sortBy === 'none'){
+                return 1;
+            }
+            else if (sortBy === 'date') {
+                return a.createdAt.diff(b.createdAt) > 0 ? 1 : -1;
+            }else if (sortBy === 'start-date') {
+                return a.startDate.diff(b.startDate) > 0 ? 1 : -1;
+            } else if (sortBy === 'end-date') {
+                return a.endDate.diff(b.endDate) > 0 ? 1 : -1;
+            }
+        }).filter((task) => {
+            console.log(task);
+            if(status === 'none'){
+                return true;
+            } else {
+                const statusMatch = task.status.includes(status);
+                console.log(statusMatch);
+                return statusMatch;
+            }
+        });
+        console.log(taskArray);
+        const data = {
+            id: task.id,
+            title: task.title,
+            tasks : taskArray
         }
-        else if (sortBy === 'date') {
-            return a.createdAt.diff(b.createdAt) > 0 ? 1 : -1;
-        }else if (sortBy === 'start-date') {
-            return a.startDate.diff(b.startDate) > 0 ? 1 : -1;
-        } else if (sortBy === 'end-date') {
-            return a.endDate.diff(b.endDate) > 0 ? 1 : -1;
-        }
-    }).filter((task) => {
-        if(status === 'none'){
-            return true;
-        } else {
-            const statusMatch = task.status.includes(status);
-            console.log(statusMatch);
-            return statusMatch;
-        }
+        taskListArray.push(data);
     });
-    return taskArray;
+    console.log(taskListArray);
+    return taskListArray;
 };
 
-export const getData = (tasks) => {
+
+export const getData = (taskList) => {
     const tasksInProgress = [];
     const tasksCompleted = [];
     const tasksDueToday = [];
     const upcomingTasks = [];
     const tasksNotStarted = [];
     const today = moment.now();
-    tasks.map((task) => {
-        if(task.status === 'completed'){
-            tasksCompleted.push(task);
-        }
-        else if(task.status === 'not-started'){
-            tasksNotStarted.push(task);
-        } else{
-            tasksInProgress.push(task);
-        }
-        if(task.endDate.diff(today, 'days') === 0 ){
-            tasksDueToday.push(task);
-        }
-        if(task.startDate.diff(today, 'days') > 1){
-            upcomingTasks.push(task);
-        }
+    console.log(taskList);
+    taskList.map((taskList) => {
+        taskList.taskList.map((task) => {
+            if(task.status === 'completed'){
+                tasksCompleted.push(task);
+            }
+            else if(task.status === 'not-started'){
+                tasksNotStarted.push(task);
+            } else{
+                tasksInProgress.push(task);
+            }
+            if(task.endDate.diff(today, 'days') === 0 ){
+                tasksDueToday.push(task);
+            }
+            if(task.startDate.diff(today, 'days') > 1){
+                upcomingTasks.push(task);
+            }
+        });
     });
     const pieData = [];
     pieData.push({status:'Not Started', number: tasksNotStarted.length});

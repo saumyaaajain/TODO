@@ -8,6 +8,16 @@
     margin: 10px;
 }
 
+.change-icon > .fa + .fa,
+.change-icon:hover > .fa {
+    color: white;
+    display: none;
+}
+.change-icon:hover > .fa + .fa {
+    color: white;
+    display: inherit;
+}
+
 .itemBox{
     border: mediumpurple;
     background-color: #61dafb;
