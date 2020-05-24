@@ -50,9 +50,11 @@ class CalendarView extends React.Component{
                         numberOfMonths={1}
                         onFocusChange={({ focused }) => this.setState({ focused })}
                         id="your_unique_id"
+                        startDate={moment().subtract(3, 'months')}
                     />
                     <Paper className="paper-stack1">
                         <br/>
+
                         <Paper className="paper-stack2">
                             <br/>
                             <Paper className="paper">

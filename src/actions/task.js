@@ -23,7 +23,9 @@ export const addTask = (
         startDate = moment.now(),
         endDate = moment.now(),
         days = 0,
-        status = 'in-progress'
+        status = 'in-progress',
+        time = '',
+        reoccurDay = '',
     } ) => ({
     type: 'ADD_TASK',
     id,
@@ -35,7 +37,9 @@ export const addTask = (
         startDate,
         endDate,
         days,
-        status
+        status,
+        time,
+        reoccurDay
     }
 });
 

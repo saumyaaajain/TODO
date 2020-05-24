@@ -136,22 +136,22 @@ const ViewFile = (props) => {
                                  {list.tasks.length > 0
                                      ? <Table size="small">
                                          <TableBody>
-                                             {list.tasks.map((tsk) => (
+                                             {list.tasks.map((task) => (
                                                  <TableRow >
                                                      <TableCell>
                                                          <FormControlLabel
                                                             control={
                                                                 <Checkbox
-                                                                    checked={tsk.status==='completed'}
-                                                                    onChange={(e) => handleChange(e,list.id ,tsk.id)}
+                                                                    checked={task.status==='completed'}
+                                                                    onChange={(e) => handleChange(e,list.id ,task.id)}
                                                                     icon={<AssignmentIcon />}
                                                                     checkedIcon={<AssignmentTurnedInIcon/>}
                                                                     color='primary'
-                                                                    name={tsk.id} />
+                                                                    name={task.id} />
                                                             }
-                                                            label={tsk.title}
+                                                            label={task.title}
                                                         /></TableCell>
-                                                     <TableCell>{tsk.description}</TableCell>
+                                                     {task.time !== '' && <TableCell>{task.time}</TableCell>}
                                                  </TableRow>
                                              ))}
 
@@ -222,12 +222,15 @@ const ViewFile = (props) => {
                      </Grid>
                      <Divider />
                      <AddTaskDetails
-                        onSubmit = {(tsk) => {
-                            const task = {
+                        onSubmit = {(task) => {
+                            console.log(task);
+                            const tsk = {
+                                ...task,
                                 title: title,
-                                ...tsk
                             };
-                            props.dispatch(addTask(id, task));
+                            setTask(null);
+                            console.log(title);
+                            props.dispatch(addTask(id, tsk));
                         }}
                      />
                  </Drawer>

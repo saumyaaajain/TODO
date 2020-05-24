@@ -7,6 +7,10 @@ import {DateRangePicker} from "react-dates";
 import Button from "@material-ui/core/Button";
 import ToggleButton from "@material-ui/lab/ToggleButton";
 import CheckIcon from "@material-ui/icons/Check";
+import InputLabel from '@material-ui/core/InputLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const initialState = {
     title: '',
@@ -18,10 +22,12 @@ const initialState = {
     days: 0,
     status: 'in-progress',
     error: '',
-    time: '10:00',
+    time: '20:00',
+    timeObject: '',
     selectTime: false,
     selectDateRange: false,
     timeChangedFlag: false,
+    reoccurDay: '',
 };
 
 export class AddTaskDetails extends React.Component{
@@ -54,14 +60,15 @@ export class AddTaskDetails extends React.Component{
     };
 
     onTimeChange = (time) =>{
-        this.setState({time: time, timeChangedFlag: true});
+        this.setState({time: time.formatted24, timeObject: time , timeChangedFlag: true});
     };
 
     setTime = () => {
-        this.setState({time: this.state.time, selectTime: false});
+        this.setState({time: this.state.time.formatted24, selectTime: false});
     };
 
     onSubmit = (e) => {
+        console.log(this.state.timeObject);
         const task = {
             title: this.state.title,
             description: this.state.description,
@@ -69,10 +76,23 @@ export class AddTaskDetails extends React.Component{
             startDate: this.state.startDate,
             endDate: this.state.endDate,
             status: 'in-progress' ,
-            time: this.state.timeChangedFlag ? this.state.time : '',
+            time: this.state.timeChangedFlag ? this.state.timeObject.formatted24 : "",
+            reoccurDay: this.state.reoccurDay
         };
         this.props.onSubmit(task);
         this.setState(initialState);
+    };
+
+    handleChange = (event) => {
+        this.setState({reoccurDay: event.target.value});
+    };
+
+    handleClose = () => {
+        this.setState({selectOpen: false});
+    };
+
+    handleOpen = () => {
+        this.setState({selectOpen: false});
     };
 
     render() {
@@ -111,6 +131,33 @@ export class AddTaskDetails extends React.Component{
                     </Grid>
 
                 </Grid>
+                <Grid item spacing={3}>
+                    <div>
+                        <FormControl>
+                            <InputLabel id="demo-controlled-open-select-label">Reoccur</InputLabel>
+                            <Select
+                                labelId="demo-controlled-open-select-label"
+                                id="demo-controlled-open-select"
+                                open={this.state.selectOpen}
+                                onClose={this.handleClose}
+                                onOpen={this.handleOpen}
+                                value={this.state.reoccurDay}
+                                onChange={this.handleChange}
+                            >
+                                <MenuItem value="">
+                                    <em>None</em>
+                                </MenuItem>
+                                <MenuItem value={'Monday'}>Monday</MenuItem>
+                                <MenuItem value={'Tuesday'}>Tuesday</MenuItem>
+                                <MenuItem value={'Wednesday'}>Wednesday</MenuItem>
+                                <MenuItem value={'Thursday'}>Thursday</MenuItem>
+                                <MenuItem value={'Friday'}>Friday</MenuItem>
+                                <MenuItem value={'Saturday'}>Saturday</MenuItem>
+                                <MenuItem value={'Sunday'}>Sunday</MenuItem>
+                            </Select>
+                        </FormControl>
+                    </div>
+                </Grid>
                 { this.state.selectTime && (
                     <div>
                         <Grid item spacing={3}>
@@ -135,7 +182,7 @@ export class AddTaskDetails extends React.Component{
                         </ToggleButton>
                     </Grid>
                     <Grid item spacing={3}>
-                        Reoccur
+                        Set Duration
                     </Grid>
 
                 </Grid>
