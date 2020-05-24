@@ -1,9 +1,6 @@
 const defaultTaskState = [];
 
 export default (state = defaultTaskState, action) => {
-    console.log(1);
-    console.log(state);
-    console.log(action);
     switch(action.type){
         case 'ADD_TASK_LIST':
             return [
@@ -11,37 +8,39 @@ export default (state = defaultTaskState, action) => {
                 action.taskLists
             ];
         case 'ADD_TASK':
-            return state.map((task) => {
-                if (task.id === action.id) {
-                    task.taskList.push(action.tasks);
+            return state.map((taskList) => {
+                if (taskList.id === action.id) {
+                    taskList.tasks.push(action.tasks);
                     return {
-                        ...task
+                        ...taskList
                     };
                 }
-                return task;
+                return taskList;
             });
         case 'REMOVE_TASK_LIST':
-            //console.log(action.id);
-            //console.log(state.filter(({ id }) => id !== action.id));
             return state.filter(({ id }) => id !== action.id);
         case 'EDIT_TASK':
-            console.log(action);
-            return state.map((task) => {
-                if (task.id === action.listId) {
-                    task.taskList.map((tsk) => {
-                        if(tsk.id === action.taskId){
-                            console.log(tsk);
-                            console.log("som");
-                            return {
+            let variable = state.map((taskList) => {
+                if (taskList.id === action.listId) {
+                    const list = taskList.tasks.map((task) => {
+                        if(task.id === action.taskId){
+
+                            const updates = {
                                 ...task,
                                 ...action.updates
                             };
+                            return updates;
                         }
-                        return tsk;
-                    })
+                        return task;
+                    });
+                    return {
+                        ...taskList,
+                        tasks:list,
+                    }
                 }
-                return task;
+                return taskList;
             });
+            return variable;
         default:
             return state;
     }

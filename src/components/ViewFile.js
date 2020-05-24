@@ -212,7 +212,7 @@ const ViewFile = (props) => {
                      open={open}
                  >
 
-                     <Grid container justify="space-between">
+                     <Grid container justify="space-between" direction="row">
                          <div className={classes.drawerContent}>Add Task Details</div>
                          <div className={classes.toolbarIcon}>
                              <IconButton onClick={handleDrawerClose}>

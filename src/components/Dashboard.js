@@ -20,6 +20,7 @@ import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import ViewFile from "./ViewFile";
 import AddTaskPage from "./AddTaskPage";
 import Reports from './Reports';
+import CalendarView from './CalendarView';
 import {PageNotFound} from './PageNotFound';
 import {useStyles} from "../style/Dashboard";
 import Copyright from "./Copyright";
@@ -95,6 +96,9 @@ export default function Dashboard() {
                                             setTitle(title);
                                         }}/> } exact={true}/>
                                         <Route path="/reports" render={(routeProps) => <Reports {...routeProps} getTitle = { (title) => {
+                                            setTitle(title);
+                                        }}/>} exact={true}/>
+                                        <Route path="/dashboard" render={(routeProps) => <CalendarView {...routeProps} getTitle = { (title) => {
                                             setTitle(title);
                                         }}/>} exact={true}/>
                                         <Route path="/" component={PageNotFound}/>

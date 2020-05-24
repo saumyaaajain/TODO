@@ -7,7 +7,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
-import Timekeeper from 'react-timekeeper';
 
 const initialState = {
     title: '',
@@ -20,6 +19,7 @@ const initialState = {
     status: 'in-progress',
     error: '',
     time: '10:00',
+    date: new Date(),
 };
 
 

@@ -4,13 +4,13 @@ import moment from "moment";
 export const addTaskList = (
     {
         title = '',
-        taskList = []
+        tasks = []
     } ) => ({
     type: 'ADD_TASK_LIST',
     taskLists:{
         id: uuid(),
         title,
-        taskList
+        tasks
     }
 });
 

@@ -6,6 +6,7 @@ import AddIcon from '@material-ui/icons/Add';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import {NavLink} from "react-router-dom";
+import EventIcon from '@material-ui/icons/Event';
 
 const navigateToDashboard = () => {
 
@@ -33,6 +34,14 @@ export const mainListItems = (
             <ListItem button>
                 <ListItemIcon>
                     <BarChartIcon />
+                </ListItemIcon>
+                <ListItemText primary="Reports" />
+            </ListItem>
+        </NavLink>
+        <NavLink to="/dashboard" style={{ textDecoration: 'none', color: 'black' }}>
+            <ListItem button>
+                <ListItemIcon>
+                    <EventIcon />
                 </ListItemIcon>
                 <ListItemText primary="Reports" />
             </ListItem>

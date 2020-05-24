@@ -87,8 +87,8 @@ export const useStyles = makeStyles((theme) => ({
         whiteSpace: 'nowrap',
         marginRight: '-75px',
         marginTop: '-25px',
-        padding: '12px',
-        // width: drawerWidth,
+        padding: '25px',
+        width: '20vw',
         height: '100vh',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,

@@ -1,0 +1,27 @@
+.div{
+    height: 100vh
+}
+
+.paper{
+    height: 95vh;
+    width: 35vw;
+    padding: 15px;
+}
+.paper-stack1{
+    height: 95vh;
+    width: 35vw;
+    margin-right: -15vw;
+    padding-left: 25px;
+    padding-top: 5px;
+}
+.paper-stack2{
+    height: 95vh;
+    width: 35vw;
+    margin-right: -15vw;
+    padding-left: 25px;
+    padding-top: 5px;
+}
+
+.title{
+    color: #00a699;
+}

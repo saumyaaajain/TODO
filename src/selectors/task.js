@@ -3,15 +3,10 @@ import moment from "moment";
 import uuid from 'react-uuid';
 
 export default (taskLists, { text, sortBy, status }) => {
-    console.log("st:");
-     console.log(status);
-    //console.log(tasks);
     const taskListArray = [];
-
-    taskLists.map((task) => {
-        const taskArray = task.taskList.filter((task) => {
-            // console.log("t:")
-            // console.log(title);
+    console.log(taskLists);
+    taskLists.map((taskList) => {
+        const taskArray = taskList.tasks.filter((task) => {
             const textMatch = task.title.toLowerCase().includes(text.toLowerCase());
 
             return textMatch;
@@ -27,24 +22,21 @@ export default (taskLists, { text, sortBy, status }) => {
                 return a.endDate.diff(b.endDate) > 0 ? 1 : -1;
             }
         }).filter((task) => {
-            console.log(task);
             if(status === 'none'){
                 return true;
             } else {
                 const statusMatch = task.status.includes(status);
-                console.log(statusMatch);
                 return statusMatch;
             }
         });
         console.log(taskArray);
         const data = {
-            id: task.id,
-            title: task.title,
+            id: taskList.id,
+            title: taskList.title,
             tasks : taskArray
         }
         taskListArray.push(data);
     });
-    console.log(taskListArray);
     return taskListArray;
 };
 
@@ -56,9 +48,8 @@ export const getData = (taskList) => {
     const upcomingTasks = [];
     const tasksNotStarted = [];
     const today = moment.now();
-    console.log(taskList);
     taskList.map((taskList) => {
-        taskList.taskList.map((task) => {
+        taskList.tasks.map((task) => {
             if(task.status === 'completed'){
                 tasksCompleted.push(task);
             }
