@@ -25,7 +25,9 @@ export const addTask = (
         days = 0,
         status = 'in-progress',
         time = '',
+        reoccur = false,
         reoccurDay = '',
+        completedOn = 0
     } ) => ({
     type: 'ADD_TASK',
     id,
@@ -39,11 +41,13 @@ export const addTask = (
         days,
         status,
         time,
-        reoccurDay
+        reoccur,
+        reoccurDay,
+        completedOn
     }
 });
 
-export const edit = (listId = '', taskId = 's', updates) => ({
+export const editTask = (listId = '', taskId = '', updates) => ({
     type: 'EDIT_TASK',
     listId,
     taskId,

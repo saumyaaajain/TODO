@@ -6,7 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import {edit} from '../actions/task';
+import {editTask} from '../actions/task';
 import { Alert } from '@material-ui/lab';
 import CheckIcon from '@material-ui/icons/Check';
 import CheckBox from "./CheckBox";
@@ -53,7 +53,7 @@ export default function AlertDialogSlide(props) {
 
     const onSubmit = (e) => {
         console.log(props);
-        props.dispatch(edit(props.task.id, props.task));
+        props.dispatch(editTask(props.task.id, props.task));
         handleClose();
     };
 

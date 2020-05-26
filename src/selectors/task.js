@@ -7,7 +7,8 @@ export default (taskLists, { text, sortBy, status }) => {
     console.log(taskLists);
     taskLists.map((taskList) => {
         const taskArray = taskList.tasks.filter((task) => {
-            const textMatch = task.title.toLowerCase().includes(text.toLowerCase());
+            console.log(text);
+            const textMatch = text === '' ? true : task.title.toLowerCase().includes(text.toLowerCase());
 
             return textMatch;
         }).sort((a, b) => {
@@ -24,9 +25,11 @@ export default (taskLists, { text, sortBy, status }) => {
         }).filter((task) => {
             if(status === 'none'){
                 return true;
-            } else {
-                const statusMatch = task.status.includes(status);
+            } else if(status === 'completed') {
+                const statusMatch = task.reoccur? task.completedOn === moment().format('DD/MM/YYYY') : task.status.includes(status);
                 return statusMatch;
+            } else {
+                return task.reoccur? task.completedOn !== moment().format('DD/MM/YYYY') : task.status.includes(status);
             }
         });
         console.log(taskArray);

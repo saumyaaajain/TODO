@@ -24,11 +24,12 @@ export default (state = defaultTaskState, action) => {
                 if (taskList.id === action.listId) {
                     const list = taskList.tasks.map((task) => {
                         if(task.id === action.taskId){
-
                             const updates = {
                                 ...task,
                                 ...action.updates
                             };
+                            console.log(1);
+                            console.log(updates);
                             return updates;
                         }
                         return task;

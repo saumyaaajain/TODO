@@ -27,6 +27,7 @@ const initialState = {
     selectTime: false,
     selectDateRange: false,
     timeChangedFlag: false,
+    reoccur: false,
     reoccurDay: '',
 };
 
@@ -77,6 +78,7 @@ export class AddTaskDetails extends React.Component{
             endDate: this.state.endDate,
             status: 'in-progress' ,
             time: this.state.timeChangedFlag ? this.state.timeObject.formatted24 : "",
+            reoccur: this.state.reoccur,
             reoccurDay: this.state.reoccurDay
         };
         this.props.onSubmit(task);
@@ -84,7 +86,7 @@ export class AddTaskDetails extends React.Component{
     };
 
     handleChange = (event) => {
-        this.setState({reoccurDay: event.target.value});
+        this.setState({reoccurDay: event.target.value, reoccur: true});
     };
 
     handleClose = () => {

@@ -12,7 +12,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Link from "@material-ui/core/Link";
 import selectTasks from '../selectors/task';
-import {add, addTask, edit, remove, removeTaskList} from "../actions/task";
+import {addTask, editTask, remove, removeTaskList} from "../actions/task";
 import TaskListFilters from "./TaskFilter";
 import EditPopUp from "./EditPopUp";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -51,6 +51,7 @@ import AssignmentTurnedInIcon from '@material-ui/icons/AssignmentTurnedIn';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddIcon from '@material-ui/icons/Add';
 import {AddTaskDetails} from "./AddTask";
+import moment from "moment";
 
 const ViewFile = (props) => {
     const classes = useStyles();
@@ -78,9 +79,14 @@ const ViewFile = (props) => {
         check:false
     });
 
-    const handleChange = (event, listId ,taskId) => {
+    const handleChange = (event, listId ,taskId, task) => {
         setCheckbox({ ...checkboxValue, [event.target.name]: event.target.checked });
-        props.dispatch(edit(listId, taskId, {status: "completed"}));
+        if(task.reoccur){
+            props.dispatch(editTask(listId, taskId, {status: "in-progress", reoccur: task.reoccur, completedOn: moment().format('DD/MM/YYYY')}));
+        }
+        else{
+            props.dispatch(editTask(listId, taskId, {status: "completed", reoccur: task.reoccur, completedOn: moment().format('DD/MM/YYYY')}));
+        }
     };
     const onAddTaskChange = (e) => {
         // console.log(e.target.value);
@@ -142,8 +148,10 @@ const ViewFile = (props) => {
                                                          <FormControlLabel
                                                             control={
                                                                 <Checkbox
-                                                                    checked={task.status==='completed'}
-                                                                    onChange={(e) => handleChange(e,list.id ,task.id)}
+                                                                    checked={task.reoccur ? task.completedOn === moment().format('DD/MM/YYYY') : task.status === 'completed'}
+                                                                    onChange={(e) => {
+                                                                        handleChange(e,list.id ,task.id, task)
+                                                                    }}
                                                                     icon={<AssignmentIcon />}
                                                                     checkedIcon={<AssignmentTurnedInIcon/>}
                                                                     color='primary'
@@ -151,7 +159,7 @@ const ViewFile = (props) => {
                                                             }
                                                             label={task.title}
                                                         /></TableCell>
-                                                     {task.time !== '' && <TableCell>{task.time}</TableCell>}
+                                                     {task.time !== '' && <TableCell>{task.reoccur && task.reoccurDay} {task.time}</TableCell>}
                                                  </TableRow>
                                              ))}
 
