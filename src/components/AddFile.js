@@ -7,8 +7,16 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
+import CancelPresentationIcon from '@material-ui/icons/CancelPresentation';
+import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
+import Title from "./Title";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import Timekeeper from "react-timekeeper";
 
 const initialState = {
+    listTitle: '',
+    listDescription: '',
     title: '',
     description: '',
     createdAt: moment(),
@@ -18,8 +26,10 @@ const initialState = {
     days: 0,
     status: 'in-progress',
     error: '',
-    time: '10:00',
+    time: '20:00',
+    timeObject: '',
     date: new Date(),
+    addTask: false
 };
 
 
@@ -30,9 +40,18 @@ export default class AddFile extends React.Component{
         this.state = initialState;
     }
 
+    onListTitleChange = (e) => {
+        e.preventDefault();
+        this.setState({listTitle: e.target.value});
+    };
+
+    onListDescriptionChange = (e) => {
+        e.preventDefault();
+        this.setState({listDescription: e.target.value});
+    };
+
     onTitleChange = (e) => {
         e.preventDefault();
-        console.log();
         this.setState({title: e.target.value});
     };
 
@@ -62,21 +81,26 @@ export default class AddFile extends React.Component{
         console.log(time);
     };
 
+    onAddTask = () => {
+        this.setState({
+            addTask : !this.state.addTask
+        })
+    };
+
+    onTimeChange = (time) =>{
+        this.setState({time: time.formatted24, timeObject: time , timeChangedFlag: true});
+    };
+
     onSubmit = (e) => {
         if(this.state.title.length === 0){
             this.setState({
                 error: 'Title is mandatory!'
             });
         }
-        if(this.state.description.length === 0){
+        if(this.state.description.length === 0) {
             this.setState({
                 error: 'Description is mandatory'
             });
-        }
-        const today = moment.now();
-        if(this.state.startDate.diff(today, 'days') > 0){
-            this.setState({status: 'not-started'})
-            console.log('not');
         }
         if(this.state.error.length === 0){
             this.setState({
@@ -89,9 +113,14 @@ export default class AddFile extends React.Component{
                 createdAt: this.state.createdAt,
                 startDate: this.state.startDate,
                 endDate: this.state.endDate,
-                status: this.state.startDate.diff(today, 'days') > 0 ? 'not-started' : 'in-progress',
+                status: 'in-progress',
             };
-            this.props.onSubmit(task);
+            const taskList = {
+                title: this.state.listTitle,
+                description: this.state.listDescription,
+                tasks: task.title === '' ? [] : [task]
+            }
+            this.props.onSubmit(taskList);
             this.setState(initialState);
         }
     };
@@ -116,8 +145,8 @@ export default class AddFile extends React.Component{
                             label="Title"
                             fullWidth
                             autoComplete="title"
-                            value={this.state.title}
-                            onChange={this.onTitleChange}
+                            value={this.state.listTitle}
+                            onChange={this.onListTitleChange}
                         />
                     </Grid>
                     <Grid item xs={12}>
@@ -128,29 +157,64 @@ export default class AddFile extends React.Component{
                             label="Description"
                             fullWidth
                             autoComplete="Description"
-                            value={this.state.description}
-                            onChange={this.onDescriptionChange}
+                            value={this.state.listDescription}
+                            onChange={this.onListDescriptionChange}
                         />
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                       <div>
-                           Complete By:
-                       </div>
-                        {this.state.startDate && this.state.startDate.format('DD/MM/YYYY').toString()} - {this.state.endDate && this.state.endDate.format('DD/MM/YYYY').toString()}
-                          ({this.state.days && this.state.days})
+                    <Grid container direction="row" justify="space-between">
+                        <Title> Add A Task</Title>
+                        {
+                            this.state.addTask
+                                ? <Tooltip title="Close Add Task"><IconButton onClick={this.onAddTask}><CancelPresentationIcon/></IconButton></Tooltip>
+                                : <Tooltip title="Open Add Task"><IconButton onClick={this.onAddTask}><KeyboardArrowDownIcon/></IconButton></Tooltip>
+                        }
+                    </Grid>
+                    {this.state.addTask &&
+                    <Grid container spacing={3}>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="title"
+                                name="title"
+                                label="Title"
+                                fullWidth
+                                autoComplete="title"
+                                value={this.state.title}
+                                onChange={this.onTitleChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                required
+                                id="description"
+                                name="description"
+                                label="Description"
+                                fullWidth
+                                autoComplete="Description"
+                                value={this.state.description}
+                                onChange={this.onDescriptionChange}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <Timekeeper
+                                time={this.state.time}
+                                onChange={this.onTimeChange}
+                            />
 
+                        </Grid>
+                        <Grid item xs={12} sm={6}>
+                            <DateRangePicker
+                                startDate={this.state.startDate}
+                                startDateId="start-date"
+                                endDate={this.state.endDate} //
+                                endDateId="end-date"
+                                onDatesChange={this.onDateChange}
+                                focusedInput={this.state.focusedInput}
+                                onFocusChange={focusedInput => this.setState({ focusedInput })}
+                            />
+                        </Grid>
                     </Grid>
-                    <Grid item xs={12} sm={6}>
-                        <DateRangePicker
-                            startDate={this.state.startDate}
-                            startDateId="start-date"
-                            endDate={this.state.endDate} //
-                            endDateId="end-date"
-                            onDatesChange={this.onDateChange}
-                            focusedInput={this.state.focusedInput}
-                            onFocusChange={focusedInput => this.setState({ focusedInput })}
-                        />
-                    </Grid>
+                    }
                     <Grid item xs={12}>
                         <Button
                             fullWidth

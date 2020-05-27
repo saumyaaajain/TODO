@@ -3,12 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="37f70c7c-c257-4db5-a78d-b85d52967a1b" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/actions/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/actions/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/AddTask.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTask.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/EditPopUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/EditPopUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ViewFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/reducers/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/reducers/task.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/selectors/task.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/selectors/task.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddFile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/AddTaskPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/AddTaskPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/ViewFile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

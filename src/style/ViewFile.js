@@ -85,8 +85,8 @@ export const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         position: 'relative',
         whiteSpace: 'nowrap',
-        marginRight: '-75px',
-        marginTop: '-25px',
+        // marginRight: '-75px',
+        // marginTop: '-25px',
         padding: '25px',
         width: '20vw',
         height: '100vh',

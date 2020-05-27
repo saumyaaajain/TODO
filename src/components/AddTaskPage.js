@@ -10,12 +10,12 @@ import Paper from "@material-ui/core/Paper";
 
 const AddTaskPage = (props) => {
     const classes = useStyles();
-    props.getTitle('ADD TASK');
+    props.getTitle('ADD TASK LIST');
     return (
     <React.Fragment>
         <Paper className={classes.paper}>
             <Title>
-                Add Task
+                Add Task List
             </Title>
             <AddFile
                 onSubmit = { (taskList) => {
