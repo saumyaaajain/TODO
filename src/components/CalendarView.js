@@ -42,40 +42,44 @@ class CalendarView extends React.Component{
     render() {
         return (
             <div className="div">
-                <Grid container justify="space-evenly" direction="row">
-                    <SingleDatePicker
-                        date={this.state.date}
-                        onDateChange={this.onDateChange}
-                        focused={true}
-                        numberOfMonths={1}
-                        onFocusChange={({ focused }) => this.setState({ focused })}
-                        id="your_unique_id"
-                        startDate={moment().subtract(3, 'months')}
-                    />
-                    <Paper className="paper-stack1">
-                        <br/>
-
-                        <Paper className="paper-stack2">
+                <Grid container justify="space-between" direction="row">
+                    <Grid item sm={4}>
+                        <SingleDatePicker
+                            date={this.state.date}
+                            onDateChange={this.onDateChange}
+                            focused={true}
+                            numberOfMonths={1}
+                            onFocusChange={({ focused }) => this.setState({ focused })}
+                            id="your_unique_id"
+                            startDate={moment().subtract(3, 'months')}
+                        />
+                    </Grid>
+                    <Grid item spacing={4}>
+                        <Paper className="paper-stack1">
                             <br/>
-                            <Paper className="paper">
-                                <Title className="title">Showing Tasks For: {this.state.formattedDate}</Title>
-                                {
-                                    this.state.dateWiseSortedMap.has(this.state.formattedDate)
-                                        ? this.state.dateWiseSortedMap.get(this.state.date.format('DD/MM/YYYY')).map((task) => (
-                                            <Table size="small">
-                                                <TableBody>
-                                                    <TableRow >
-                                                        <TableCell>{task.title}</TableCell>
-                                                        <TableCell align="right">...from: {task.taskListName}</TableCell>
-                                                    </TableRow>
-                                                </TableBody>
-                                            </Table>
-                                        ))
-                                        : 'No Tasks...'
-                                }
+
+                            <Paper className="paper-stack2">
+                                <br/>
+                                <Paper className="paper">
+                                    <Title className="title">Showing Tasks For: {this.state.formattedDate}</Title>
+                                    {
+                                        this.state.dateWiseSortedMap.has(this.state.formattedDate)
+                                            ? this.state.dateWiseSortedMap.get(this.state.date.format('DD/MM/YYYY')).map((task) => (
+                                                <Table size="small">
+                                                    <TableBody>
+                                                        <TableRow >
+                                                            <TableCell>{task.title}</TableCell>
+                                                            <TableCell align="right">...from: {task.taskListName}</TableCell>
+                                                        </TableRow>
+                                                    </TableBody>
+                                                </Table>
+                                            ))
+                                            : 'No Tasks...'
+                                    }
+                                </Paper>
                             </Paper>
                         </Paper>
-                    </Paper>
+                    </Grid>
                 </Grid>
             </div>
         );

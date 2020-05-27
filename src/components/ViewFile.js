@@ -103,9 +103,10 @@ const ViewFile = (props) => {
     const onSearchClose = () => {
         setState(false);
     };
+
   return (
       <React.Fragment>
-         <div className={classes.bodyContent}>
+         <div id="test" className={classes.bodyContent}>
              <Grid item xs={12}>
                  <Grid container justify="space-between">
                      {/*<Paper className={classes.paperFilter} elevation={5}>*/}
@@ -183,7 +184,11 @@ const ViewFile = (props) => {
                                              color="primary"
                                              position="bottom"
                                              // className={classes.addButton}
-                                             onClick={() => handleDrawerOpen(list.id)}
+                                             onClick={() => {
+                                                 handleDrawerOpen(list.id);
+                                                 console.log(document.getElementById('drawer'));
+                                                 // document.getElementById('drawer').scrollIntoView();
+                                             }}
                                          >
                                              <AddIcon/>
                                          </IconButton>
@@ -210,8 +215,10 @@ const ViewFile = (props) => {
                      </Grid>
                  </Grid>
              </Grid>
-             <div>
+             {open &&
+             <div id="drawer" tabIndex="-1">
                  <Drawer
+                     id="drawer"
                      variant="persistent"
                      anchor="right"
                      classes={{
@@ -224,25 +231,26 @@ const ViewFile = (props) => {
                          <div className={classes.drawerContent}>Add Task Details</div>
                          <div className={classes.toolbarIcon}>
                              <IconButton onClick={handleDrawerClose}>
-                                 <ChevronLeftIcon />
+                                 <ChevronLeftIcon/>
                              </IconButton>
                          </div>
                      </Grid>
-                     <Divider />
+                     <Divider/>
                      <AddTaskDetails
-                        onSubmit = {(task) => {
-                            console.log(task);
-                            const tsk = {
-                                ...task,
-                                title: title,
-                            };
-                            setTask(null);
-                            console.log(title);
-                            props.dispatch(addTask(id, tsk));
-                        }}
+                         onSubmit={(task) => {
+                             console.log(task);
+                             const tsk = {
+                                 ...task,
+                                 title: title,
+                             };
+                             setTask(null);
+                             console.log(title);
+                             props.dispatch(addTask(id, tsk));
+                         }}
                      />
                  </Drawer>
              </div>
+             }
          </div>
       </React.Fragment>
   );
