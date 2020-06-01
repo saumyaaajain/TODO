@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="37f70c7c-c257-4db5-a78d-b85d52967a1b" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/GrowCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Login.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/transitions.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/style/Login.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/style/TaskFilter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/Dashboard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Dashboard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/TaskFilter.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/TaskFilter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ViewFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ViewFile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style/ViewFile.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style/ViewFile.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AddTaskPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AddTaskPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +88,7 @@
       <updated>1589564447435</updated>
       <workItem from="1589564449951" duration="80746000" />
       <workItem from="1590061481360" duration="2805000" />
-      <workItem from="1591008581009" duration="16253000" />
+      <workItem from="1591008581009" duration="16603000" />
     </task>
     <servers />
   </component>
