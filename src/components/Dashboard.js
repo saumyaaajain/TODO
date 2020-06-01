@@ -25,6 +25,9 @@ import {PageNotFound} from './PageNotFound';
 import {useStyles} from "../style/Dashboard";
 import Copyright from "./Copyright";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import SimpleGrow from "./GrowCard";
+import {FlipCard} from "./transitions";
+import Login from "./Login";
 
 export default function Dashboard() {
     const classes = useStyles();
@@ -101,6 +104,7 @@ export default function Dashboard() {
                                         <Route path="/dashboard" render={(routeProps) => <CalendarView {...routeProps} getTitle = { (title) => {
                                             setTitle(title);
                                         }}/>} exact={true}/>
+                                        <Route path="/animate" component={SimpleGrow} exact={true}/>
                                         <Route path="/" component={PageNotFound}/>
                                     </Switch>
                                 </Grid>

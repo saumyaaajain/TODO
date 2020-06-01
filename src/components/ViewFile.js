@@ -16,7 +16,7 @@ import {addTask, editTask, remove, removeTaskList} from "../actions/task";
 import TaskListFilters from "./TaskFilter";
 import EditPopUp from "./EditPopUp";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import '../style/ViewFile.css'
+import '../style/ViewFile.css';
 import {useStyles} from "../style/ViewFile";
 import clsx from "clsx";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -52,6 +52,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import AddIcon from '@material-ui/icons/Add';
 import {AddTaskDetails} from "./AddTask";
 import moment from "moment";
+import Grow from "@material-ui/core/Grow";
 
 const ViewFile = (props) => {
     const classes = useStyles();
@@ -122,97 +123,111 @@ const ViewFile = (props) => {
                  {searchPageVisible && <Paper className={classes.paper}><TaskListFilters/></Paper>}
                  <Grid container justify="space-evenly" spacing={3}>
                      {props.taskLists.map((list) => (
-                         <Grid key={list.id} item>
-                             <Paper className={classes.paperTitle} elevation={5}>
-                                 <Grid key={list.id} justify="space-between" container>
-                                     <div className={classes.title}>{list.title}</div>
-                                     <Tooltip title="Delete this list">
-                                         <IconButton
-                                             key={list.id}
-                                             onClick={() => onDelete(list.id)}
-                                         >
+                         <div>
+                             <Grow
+                                 in={true}
+                                 style={{ transformOrigin: '0 0 0' }}
+                                 {...{timeout: 2000}}
+                             >
+                                 <Grid key={list.id} item>
+                                     <Paper className={classes.paperTitle} elevation={5}>
+                                         <Grid key={list.id} justify="space-between" container>
+                                             <div className={classes.title}>{list.title}</div>
+                                             <Tooltip title="Delete this list">
+                                                 <IconButton
+                                                     key={list.id}
+                                                     onClick={() => onDelete(list.id)}
+                                                 >
                                       <span className={classes.deleteButton}>
                                           <DeleteSweepIcon />
                                           <DeleteForeverIcon className={classes.sweepButton}/>
                                       </span>
-                                         </IconButton>
-                                     </Tooltip>
+                                                 </IconButton>
+                                             </Tooltip>
+                                         </Grid>
+                                     </Paper>
+                                     <Paper className={classes.paperTaskList} elevation={5}>
+                                         {list.tasks.length > 0
+                                             ? <Table
+                                                 size="small">
+                                                 <TableBody>
+                                                     {list.tasks.map((task) => (
+                                                         <TableRow >
+                                                             <TableCell>
+                                                                 <FormControlLabel
+                                                                     control={
+                                                                         <Checkbox
+                                                                             checked={task.reoccur ? task.completedOn === moment().format('DD/MM/YYYY') : task.status === 'completed'}
+                                                                             onChange={(e) => {
+                                                                                 handleChange(e,list.id ,task.id, task)
+                                                                             }}
+                                                                             icon={<AssignmentIcon />}
+                                                                             checkedIcon={<AssignmentTurnedInIcon/>}
+                                                                             color='primary'
+                                                                             name={task.id} />
+                                                                     }
+                                                                     label={task.title}
+                                                                 /></TableCell>
+                                                             {task.time !== '' && <TableCell>{task.reoccur && task.reoccurDay} {task.time}</TableCell>}
+                                                         </TableRow>
+                                                     ))}
+
+                                                 </TableBody>
+                                             </Table>
+                                             : "No Data"
+                                         }
+                                         <Grid justify="space-between" container>
+                                             <TextField
+                                                 required
+                                                 id="title"
+                                                 name="title"
+                                                 label="Title"
+                                                 autoComplete="title"
+                                                 onChange={onAddTaskChange}
+
+                                             />
+                                             <Tooltip title="Open drawer">
+                                                 <IconButton
+                                                     variant="contained"
+                                                     color="primary"
+                                                     position="bottom"
+                                                     // className={classes.addButton}
+                                                     onClick={() => {
+                                                         handleDrawerOpen(list.id);
+                                                         console.log(document.getElementById('drawer'));
+                                                         // document.getElementById('drawer').scrollIntoView();
+                                                     }}
+                                                 >
+                                                     <AddIcon/>
+                                                 </IconButton>
+                                             </Tooltip>
+                                         </Grid>
+                                     </Paper>
                                  </Grid>
+                             </Grow>
+                         </div>
+                     ))}
+                     <Grow
+                         in={true}
+                         style={{ transformOrigin: '0 0 0' }}
+                         {...{timeout: 5000}}
+                     >
+                         <Grid item>
+                             <Paper className={classes.paperTitle} elevation={5}>
+                                 Add List
                              </Paper>
-                             <Paper className={classes.paperTaskList} elevation={5}>
-                                 {list.tasks.length > 0
-                                     ? <Table size="small">
-                                         <TableBody>
-                                             {list.tasks.map((task) => (
-                                                 <TableRow >
-                                                     <TableCell>
-                                                         <FormControlLabel
-                                                            control={
-                                                                <Checkbox
-                                                                    checked={task.reoccur ? task.completedOn === moment().format('DD/MM/YYYY') : task.status === 'completed'}
-                                                                    onChange={(e) => {
-                                                                        handleChange(e,list.id ,task.id, task)
-                                                                    }}
-                                                                    icon={<AssignmentIcon />}
-                                                                    checkedIcon={<AssignmentTurnedInIcon/>}
-                                                                    color='primary'
-                                                                    name={task.id} />
-                                                            }
-                                                            label={task.title}
-                                                        /></TableCell>
-                                                     {task.time !== '' && <TableCell>{task.reoccur && task.reoccurDay} {task.time}</TableCell>}
-                                                 </TableRow>
-                                             ))}
-
-                                         </TableBody>
-                                     </Table>
-                                     : "No Data"
-                                 }
-                                 <Grid justify="space-between" container>
-                                     <TextField
-                                         required
-                                         id="title"
-                                         name="title"
-                                         label="Title"
-                                         autoComplete="title"
-                                         onChange={onAddTaskChange}
-
-                                     />
-                                     <Tooltip title="Open drawer">
-                                         <IconButton
-                                             variant="contained"
-                                             color="primary"
-                                             position="bottom"
-                                             // className={classes.addButton}
-                                             onClick={() => {
-                                                 handleDrawerOpen(list.id);
-                                                 console.log(document.getElementById('drawer'));
-                                                 // document.getElementById('drawer').scrollIntoView();
-                                             }}
-                                         >
-                                             <AddIcon/>
-                                         </IconButton>
+                             <Paper className={classes.paper} elevation={7}>
+                                 <NavLink to={{
+                                     pathname:"/add",
+                                     aboutProps: {id: null}
+                                 }} exact={true} style={{ textDecoration: 'none', color: 'black' }} >
+                                     <Tooltip title="Add a new task list">
+                                         <NoteAddIcon/>
                                      </Tooltip>
-                                 </Grid>
+                                 </NavLink>
                              </Paper>
                          </Grid>
-
-                     ))}
-                     <Grid item>
-                         <Paper className={classes.paperTitle} elevation={5}>
-                             Add List
-                         </Paper>
-                         <Paper className={classes.paper} elevation={7}>
-                             <NavLink to={{
-                                 pathname:"/add",
-                                 aboutProps: {id: null}
-                             }} exact={true} style={{ textDecoration: 'none', color: 'black' }} >
-                                 <Tooltip title="Add a new task list">
-                                     <NoteAddIcon/>
-                                 </Tooltip>
-                             </NavLink>
-                         </Paper>
-                     </Grid>
+                     </Grow>
                  </Grid>
              </Grid>
              {open &&

@@ -13,13 +13,16 @@ import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Select from "@material-ui/core/Select";
 import MenuItem from '@material-ui/core/MenuItem';
+import {useStyles} from '../style/TaskFilter'
 
 const TaskListFilters = (props) => {
+    const classes  = useStyles();
     return (
     <div>
         <Grid container spacing={3}>
             <Grid item xs={12} sm={6}>
                 <TextField
+                    className={classes.textEdit}
                     required
                     id="description"
                     name="description"
@@ -34,6 +37,7 @@ const TaskListFilters = (props) => {
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Select
+                    className={classes.dropDown}
                     labelId="dropDown"
                     id="select"
                     value={props.filters.sortBy}
@@ -59,6 +63,7 @@ const TaskListFilters = (props) => {
             </Grid>
             <Grid item xs={12} sm={3}>
                 <Select
+                    className={classes.dropDown}
                     labelId="dropDown1"
                     id="select1"
                     value={props.filters.status}
