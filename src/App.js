@@ -7,6 +7,8 @@ import taskLists from './reducers/task';
 import {addTaskList} from './actions/task';
 import filtersReducer from './reducers/filter';
 import moment from "moment";
+import {useHistory} from 'react-router-dom';
+import createHistory from "history/createBrowserHistory";
 
 const store = createStore(combineReducers({
     taskLists: taskLists,
@@ -21,6 +23,9 @@ store.dispatch(addTaskList({id: '1235',title:'TL 3', tasks: [{title:'task 3',des
 const state = store.getState();
 console.log(1);
 console.log(state);
+
+// let history = createHistory();
+// history.push('/login');
 
 function App() {
   return (

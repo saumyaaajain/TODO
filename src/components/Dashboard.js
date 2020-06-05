@@ -28,6 +28,10 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import SimpleGrow from "./GrowCard";
 import {FlipCard} from "./transitions";
 import Login from "./Login";
+import AppContext from "../context/ContextAPI";
+import createHistory from "history/createBrowserHistory";
+
+export const history = createHistory();
 
 export default function Dashboard() {
     const classes = useStyles();
@@ -46,52 +50,61 @@ export default function Dashboard() {
             setState({title: tte});
         }
     };
-//    const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
+
+    const [user, setUser] = React.useState({});
+    const value = { user, setUser };
     return (
-        <Router>
-            <div className={classes.root}>
-                <CssBaseline />
-                <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-                    <Toolbar className={classes.toolbar}>
-                        <IconButton
-                            edge="start"
-                            color="inherit"
-                            aria-label="open drawer"
-                            onClick={handleDrawerOpen}
-                            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+        <Router history = {history} >
+            <Switch>
+                <AppContext.Provider value={value} >
+                    {!!(user.user)
+                        ? <Route to="/login" component={Login}/>
+                        : <div className={classes.root}>
+                        <CssBaseline />
+                        <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
+                            <Toolbar className={classes.toolbar}>
+                                <IconButton
+                                    edge="start"
+                                    color="inherit"
+                                    aria-label="open drawer"
+                                    onClick={handleDrawerOpen}
+                                    className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
+                                >
+                                    <MenuIcon />
+                                </IconButton>
+                                <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
+                                    {state.title}
+                                </Typography>
+                                <IconButton color="inherit">
+                                    <ExitToAppIcon/>
+                                </IconButton>
+                            </Toolbar>
+                        </AppBar>
+                        <Drawer
+                            variant="permanent"
+                            classes={{
+                                paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
+                            }}
+                            open={open}
                         >
-                            <MenuIcon />
-                        </IconButton>
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            {state.title}
-                        </Typography>
-                        <IconButton color="inherit">
-                            <ExitToAppIcon/>
-                        </IconButton>
-                    </Toolbar>
-                </AppBar>
-                <Drawer
-                    variant="permanent"
-                    classes={{
-                        paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-                    }}
-                    open={open}
-                >
-                    <div className={classes.toolbarIcon}>
-                        <IconButton onClick={handleDrawerClose}>
-                            <ChevronLeftIcon />
-                        </IconButton>
-                    </div>
-                    <Divider />
-                    <List>{mainListItems}</List>
-                </Drawer>
-                <main className={classes.content}>
-                    <div className={classes.appBarSpacer} />
-                    <Container maxWidth="lg" className={classes.container}>
-                            <Grid container spacing={3}>
-                                <Grid item xs={12}>
-                                    <Switch>
+                            <div className={classes.toolbarIcon}>
+                                <IconButton onClick={handleDrawerClose}>
+                                    <ChevronLeftIcon />
+                                </IconButton>
+                            </div>
+                            <Divider />
+                            <List>{mainListItems}</List>
+                            <List><div>
+                                {console.log(user)}
+                                L- {user.user && user.user._id}
+                            </div></List>
+                        </Drawer>
+                        <main className={classes.content}>
+                            <div className={classes.appBarSpacer} />
+                            <Container maxWidth="lg" className={classes.container}>
+                                <Grid container spacing={3}>
+                                    <Grid item xs={12}>
                                         <Route path="/" render={(routeProps) => <ViewFile {...routeProps} getTitle = { (title) => {
                                             setTitle(title);
                                         }}/>} exact={true}/>
@@ -105,16 +118,17 @@ export default function Dashboard() {
                                             setTitle(title);
                                         }}/>} exact={true}/>
                                         <Route path="/animate" component={SimpleGrow} exact={true}/>
-                                        <Route path="/" component={PageNotFound}/>
-                                    </Switch>
+                                        {/*<Route path="/" component={PageNotFound}/>*/}
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        <Box pt={5}>
-                            <Copyright />
-                        </Box>
-                    </Container>
-                </main>
-            </div>
+                                <Box pt={5}>
+                                    <Copyright />
+                                </Box>
+                            </Container>
+                        </main>
+                    </div>}
+                </AppContext.Provider>
+            </Switch>
         </Router>
     );
 }
