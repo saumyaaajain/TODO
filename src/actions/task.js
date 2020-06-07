@@ -1,51 +1,43 @@
 import uuid from 'react-uuid';
 import moment from "moment";
 
+export const setTaskList = (tasklist) => ({
+    type: "SET_TASKLIST",
+    taskLists : tasklist
+
+})
+
 export const addTaskList = (
     {
-        title = '',
-        tasks = []
+        _id,
+        tasks = [],
+        title,
+        owner,
+        createdAt,
+        updatedAt
     } ) => ({
     type: 'ADD_TASK_LIST',
-    taskLists:{
-        id: uuid(),
+    taskLists: {
+        id: _id,
+        tasks,
         title,
-        tasks
+        owner,
+        createdAt,
+        updatedAt
     }
 });
 
-export const addTask = (
+export const addTask = ({
     id,
-    {
-        title = '',
-        description = '',
-        createdAt = moment.now(),
-        startDate = moment.now(),
-        endDate = moment.now(),
-        days = 0,
-        status = 'in-progress',
-        time = '',
-        reoccur = false,
-        reoccurDay = '',
-        completedOn = 0
-    } ) => ({
+    task }) => {
+    console.log(task)
+    return {
     type: 'ADD_TASK',
     id,
     tasks:{
-        id: uuid(),
-        title,
-        description,
-        createdAt,
-        startDate,
-        endDate,
-        days,
-        status,
-        time,
-        reoccur,
-        reoccurDay,
-        completedOn
+        ...task,
     }
-});
+}};
 
 export const editTask = (listId = '', taskId = '', updates) => ({
     type: 'EDIT_TASK',

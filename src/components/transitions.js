@@ -6,7 +6,6 @@ import Grid from "@material-ui/core/Grid";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 const useStyles = (theme) => {
-    const color = ["#f50057", "YELLOW", "#3f51b5"];
     return {
         body:{
             height: "50vh",
@@ -16,7 +15,8 @@ const useStyles = (theme) => {
             alignSelf: "centre",
             justifyContent: "centre",
             marginTop: "35vh",
-            marginLeft: "5vw"
+            marginLeft: "5vw",
+            marginRight: "7vw"
         },
         card: {
             height: "10vh",
@@ -27,7 +27,7 @@ const useStyles = (theme) => {
                 fontSize: "xx-large",
         },
         backCard: {
-            background: color[Math.floor(Math.random() * color.length)],
+            background: "#3f51b5",
                 height: "10vh",
                 width: "5vw",
                 display: 'flex',

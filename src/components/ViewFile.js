@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import {connect} from 'react-redux';
 import '../style/ViewFile.css';
 import Button from "@material-ui/core/Button";
@@ -53,17 +53,16 @@ import AddIcon from '@material-ui/icons/Add';
 import {AddTaskDetails} from "./AddTask";
 import moment from "moment";
 import Grow from "@material-ui/core/Grow";
+import {addTaskToDatabase, deleteTaskListFromDatabase, editTaskOfDatabase} from "../db/db";
+import AppContext from "../context/ContextAPI";
 
 const ViewFile = (props) => {
     const classes = useStyles();
-    console.log(props);
     const [searchPageVisible, setState] = React.useState(false);
     const [title, setTask] = React.useState( '');
     const [id, setId] = React.useState('');
+    const {user, setUser} = useContext(AppContext);
     props.getTitle('VIEW TASK');
-    const onSubmit = (task) => {
-        console.log(task);
-    };
 
     //drawer
     const [open, setOpen] = React.useState(false);
@@ -81,22 +80,21 @@ const ViewFile = (props) => {
     });
 
     const handleChange = (event, listId ,taskId, task) => {
+        console.log(listId);
+        console.log(taskId);
         setCheckbox({ ...checkboxValue, [event.target.name]: event.target.checked });
         if(task.reoccur){
             props.dispatch(editTask(listId, taskId, {status: "in-progress", reoccur: task.reoccur, completedOn: moment().format('DD/MM/YYYY')}));
         }
         else{
-            props.dispatch(editTask(listId, taskId, {status: "completed", reoccur: task.reoccur, completedOn: moment().format('DD/MM/YYYY')}));
+            editTaskOfDatabase({props: props, list_id: listId, task_id: taskId, auth_token: user.token, status: "COMPLETED", taskReoccur:task.reoccur})
         }
     };
     const onAddTaskChange = (e) => {
-        // console.log(e.target.value);
         setTask( e.target.value);
     };
     const onDelete = (id) => {
-        console.log("som");
-        console.log(id);
-        props.dispatch(removeTaskList(id));
+        deleteTaskListFromDatabase({props: props, auth_token: user.token, tasklist_id: id})
     };
     const onSearchOpen = () => {
         setState(true);
@@ -113,7 +111,7 @@ const ViewFile = (props) => {
                      {/*<Paper className={classes.paperFilter} elevation={5}>*/}
                      {/*    Filter*/}
                      {/*</Paper>*/}
-                     Filters:
+                     <Title>Filters:</Title>
                      {
                          searchPageVisible
                              ? <Tooltip title="Close Filters"><IconButton onClick={onSearchClose}><CancelPresentationIcon/></IconButton></Tooltip>
@@ -157,9 +155,9 @@ const ViewFile = (props) => {
                                                                  <FormControlLabel
                                                                      control={
                                                                          <Checkbox
-                                                                             checked={task.reoccur ? task.completedOn === moment().format('DD/MM/YYYY') : task.status === 'completed'}
+                                                                             checked={task.reoccur ? task.completedOn === moment().format('DD/MM/YYYY') : task.status === 'COMPLETED'}
                                                                              onChange={(e) => {
-                                                                                 handleChange(e,list.id ,task.id, task)
+                                                                                 handleChange(e,list.id ,task._id, task)
                                                                              }}
                                                                              icon={<AssignmentIcon />}
                                                                              checkedIcon={<AssignmentTurnedInIcon/>}
@@ -179,7 +177,6 @@ const ViewFile = (props) => {
                                          <Grid justify="space-between" container>
                                              <TextField
                                                  required
-                                                 id="title"
                                                  name="title"
                                                  label="Title"
                                                  autoComplete="title"
@@ -194,7 +191,6 @@ const ViewFile = (props) => {
                                                      // className={classes.addButton}
                                                      onClick={() => {
                                                          handleDrawerOpen(list.id);
-                                                         console.log(document.getElementById('drawer'));
                                                          // document.getElementById('drawer').scrollIntoView();
                                                      }}
                                                  >
@@ -253,14 +249,12 @@ const ViewFile = (props) => {
                      <Divider/>
                      <AddTaskDetails
                          onSubmit={(task) => {
-                             console.log(task);
                              const tsk = {
                                  ...task,
                                  title: title,
                              };
-                             setTask(null);
-                             console.log(title);
-                             props.dispatch(addTask(id, tsk));
+                             setTask("");
+                             addTaskToDatabase({props: props,auth_token: user.token ,...tsk, tasklist_id: id })
                          }}
                      />
                  </Drawer>
@@ -273,7 +267,6 @@ const ViewFile = (props) => {
 
 const mapStateToProps = (state) => {
     console.log(state);
-    console.log((state.filters));
     return {
         taskLists: selectTasks(state.taskLists, state.filters)
     }

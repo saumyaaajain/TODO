@@ -1,0 +1,1 @@
+global.token = 123;

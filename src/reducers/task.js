@@ -1,3 +1,4 @@
+
 const defaultTaskState = [];
 
 export default (state = defaultTaskState, action) => {
@@ -8,6 +9,7 @@ export default (state = defaultTaskState, action) => {
                 action.taskLists
             ];
         case 'ADD_TASK':
+            console.log(action.tasks);
             return state.map((taskList) => {
                 if (taskList.id === action.id) {
                     taskList.tasks.push(action.tasks);
@@ -23,13 +25,11 @@ export default (state = defaultTaskState, action) => {
             let variable = state.map((taskList) => {
                 if (taskList.id === action.listId) {
                     const list = taskList.tasks.map((task) => {
-                        if(task.id === action.taskId){
+                        if(task._id === action.taskId){
                             const updates = {
                                 ...task,
                                 ...action.updates
                             };
-                            console.log(1);
-                            console.log(updates);
                             return updates;
                         }
                         return task;
@@ -42,6 +42,17 @@ export default (state = defaultTaskState, action) => {
                 return taskList;
             });
             return variable;
+        case "SET_TASKLIST": {
+            const tasklistList = [];
+            action.taskLists.docs.map((tasklist) => {
+                tasklistList.push({
+                    id: tasklist._id,
+                    title: tasklist.title,
+                    tasks: tasklist.tasks
+                });
+            })
+            return tasklistList
+        }
         default:
             return state;
     }

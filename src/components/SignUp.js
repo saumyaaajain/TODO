@@ -14,17 +14,22 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import FlipCardAnimation from './transitions';
 import AppContext from "../context/ContextAPI";
-import {Redirect, useHistory} from 'react-router-dom';
 import {history} from "./Dashboard";
 import Copyright from "./Copyright";
 import {useStyles} from "../style/LandingPage";
 
-export default function Login(props) {
+export default function SignUp(props) {
     const classes = useStyles();
+    const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
     const {user, setUser} = useContext(AppContext);
     const [auth_token, setAuthToken] = React.useState('');
+
+    const onNameChange = (e) => {
+        e.preventDefault();
+        setName(e.target.value);
+    }
 
     const onEmailChange = (e) => {
         e.preventDefault();
@@ -36,13 +41,18 @@ export default function Login(props) {
         setPassword(e.target.value);
     }
 
-    const signIn = (e) => {
+    const signIn = () => {
+        props.setSignIn(true);
+    }
+
+    const signUp = (e) => {
         e.preventDefault();
-        console.log("sign in button clicked");
         const myHeaders = new Headers();
-        myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
+        // myHeaders.append("Host" ,"https://todo-app-demo-backend.herokuapp.com/");
+        myHeaders.append( "Content-Type", "application/x-www-form-urlencoded");
 
         const urlencoded = new URLSearchParams();
+        urlencoded.append('name', name);
         urlencoded.append("email", email);
         urlencoded.append("password", password);
 
@@ -53,7 +63,7 @@ export default function Login(props) {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8010/login", requestOptions)
+        fetch("http://localhost:8010/register", requestOptions)
             .then(response => {
                 const variable = response.json();
                 console.log("I'll gooooo madddd", variable );
@@ -65,10 +75,6 @@ export default function Login(props) {
                 if(result.token){
                     setAuthToken(result.token);
                     console.log("you are registered with us, sorry, we cant help!");
-                    setUser(result);
-                    localStorage.setItem('user', JSON.stringify(result));
-                    history.push('/');
-                    // return <Redirect to="/add"/>;
                 }
                 else{
                     console.log("Congrats, you're not registered! Take my advise, use another app!!!");
@@ -77,23 +83,30 @@ export default function Login(props) {
             .catch(error => {
                 console.log("Something went wrong... Even idk what.. dont wait up, its never gonna work!")
             })
-
-    }
-
-    const signUp = () => {
-        props.setSignIn(false)
     }
 
     return (
-        <Grid className={classes.component} item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
+        <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign in
+                    Sign up
                 </Typography>
                 <form className={classes.form} noValidate>
+                    <TextField
+                        variant="outlined"
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="name"
+                        label="Name"
+                        name="name"
+                        autoComplete="name"
+                        autoFocus
+                        onChange={onNameChange}
+                    />
                     <TextField
                         variant="outlined"
                         margin="normal"
@@ -124,17 +137,17 @@ export default function Login(props) {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
-                        onClick={signIn}
+                        onClick={signUp}
                     >
-                        Sign In
+                        Sign Up
                     </Button>
                     <Grid container>
                         <Grid item xs>
 
                         </Grid>
                         <Grid item>
-                            <Link href="#" variant="body2" onClick={signUp}>
-                                {"Don't have an account? Sign Up"}
+                            <Link href="#" variant="body2" onClick={signIn}>
+                                {"Have an account? Sign In"}
                             </Link>
                         </Grid>
                     </Grid>

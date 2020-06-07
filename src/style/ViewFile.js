@@ -84,13 +84,13 @@ export const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         position: 'relative',
-        // whiteSpace: 'nowrap',
+        // height: "75vh",
+        // width: "32vw",
+        whiteSpace: 'nowrap',
         border: 'black',
         // marginRight: '-75px',
         // marginTop: '-25px',
         padding: '25px',
-        // width: '20vw',
-        // height: '100vh',
         transition: theme.transitions.create('width', {
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,

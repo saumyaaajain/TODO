@@ -4,35 +4,33 @@ import uuid from 'react-uuid';
 
 export default (taskLists, { text, sortBy, status }) => {
     const taskListArray = [];
-    console.log(taskLists);
     taskLists.map((taskList) => {
         const taskArray = taskList.tasks.filter((task) => {
-            console.log(text);
             const textMatch = text === '' ? true : task.title.toLowerCase().includes(text.toLowerCase());
 
             return textMatch;
-        }).sort((a, b) => {
-            if(sortBy === 'none'){
-                return 1;
-            }
-            else if (sortBy === 'date') {
-                return a.createdAt.diff(b.createdAt) > 0 ? 1 : -1;
-            }else if (sortBy === 'start-date') {
-                return a.startDate.diff(b.startDate) > 0 ? 1 : -1;
-            } else if (sortBy === 'end-date') {
-                return a.endDate.diff(b.endDate) > 0 ? 1 : -1;
-            }
         }).filter((task) => {
             if(status === 'none'){
                 return true;
             } else if(status === 'completed') {
-                const statusMatch = task.reoccur? task.completedOn === moment().format('DD/MM/YYYY') : task.status.includes(status);
+                const statusMatch = task.reoccur? task.completedOn === moment().format('DD/MM/YYYY') : task.status.includes("COMPLETED");
                 return statusMatch;
             } else {
-                return task.reoccur? task.completedOn !== moment().format('DD/MM/YYYY') : task.status.includes(status);
+                return task.reoccur? task.completedOn !== moment().format('DD/MM/YYYY') : task.status.includes("IN_PROGRESS");
             }
         });
-        console.log(taskArray);
+        //     .sort((a, b) => {
+        //     if(sortBy === 'none'){
+        //         return 1;
+        //     }
+        //     else if (sortBy === 'date') {
+        //         return a.createdAt.diff(b.createdAt) > 0 ? 1 : -1;
+        //     }else if (sortBy === 'start-date') {
+        //         return a.startDate.diff(b.startDate) > 0 ? 1 : -1;
+        //     } else if (sortBy === 'end-date') {
+        //         return a.endDate.diff(b.endDate) > 0 ? 1 : -1;
+        //     }
+        // });
         const data = {
             id: taskList.id,
             title: taskList.title,
