@@ -6,7 +6,6 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
-import {editTask} from '../actions/task';
 import { Alert } from '@material-ui/lab';
 import CheckIcon from '@material-ui/icons/Check';
 import CheckBox from "./CheckBox";
@@ -21,49 +20,18 @@ export default function AlertDialogSlide(props) {
 
     const handleClickOpen = () => {
         setOpen(true);
+        props.setState(true);
     };
 
     const handleClose = () => {
         setOpen(false);
-    };
-
-    const onTitleChange = (e) => {
-        e.preventDefault();
-        props.task.title = e.target.value;
-        console.log(props.task.title);
-    };
-
-    const onDescriptionChange = (e) => {
-        e.preventDefault();
-        this.setState({description: e.target.value});
-    };
-
-    const onDateChange = ({ startDate, endDate }) => {
-        this.setState({
-            startDate,
-            endDate,
-        });
-        if(startDate && endDate){
-            this.setState({
-                days: endDate.diff(startDate , 'days')
-            });
-        }
-        console.log(this.state.startDate);
-    };
-
-    const onSubmit = (e) => {
-        console.log(props);
-        props.dispatch(editTask(props.task.id, props.task));
-        handleClose();
+        props.setState(false);
     };
 
     return (
         <div>
-            <Button onClick={handleClickOpen}>
-                Edit
-            </Button>
             <Dialog
-                open={open}
+                open={props.state}
                 TransitionComponent={Transition}
                 fullWidth={true}
                 keepMounted
@@ -71,27 +39,24 @@ export default function AlertDialogSlide(props) {
                 aria-labelledby="alert-dialog-slide-title"
                 aria-describedby="alert-dialog-slide-description"
             >
-                {props.task.status === 'completed' && <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
+                {props.task.status === 'COMPLETED' && <Alert icon={<CheckIcon fontSize="inherit" />} severity="success">
                     Task Completed
                 </Alert>}
                 <DialogTitle id="alert-dialog-slide-title">
                     <Title>{props.task.title}</Title>
                 </DialogTitle>
                 <DialogTitle>
-                    {props.task.description}
+                    {props.task.description}                                  ... from {props.tasklist.title}
                 </DialogTitle>
                 <DialogContent>
-                    <CheckBox {...props} onStatusChange = {(stat) => {
-                        console.log(stat);
-                        setStatus({status: stat});
-                    }}/>
+                    <p>Created At: {props.task.createdAt.toString()}</p>
+                    <p>Start Date: {props.task.startDate.toString()}</p>
+                    <p>End Date: {props.task.endDate.toString()}</p>
+                    <p>Updated At: {props.task.updatedAt.toString()}</p>
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
                         Cancel
-                    </Button>
-                    <Button onClick={onSubmit} color="primary">
-                        Edit
                     </Button>
                 </DialogActions>
             </Dialog>

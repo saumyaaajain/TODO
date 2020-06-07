@@ -18,6 +18,7 @@ export default function Login(props) {
     const classes = useStyles();
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [error, setError] = React.useState('');
     const {user, setUser} = useContext(AppContext);
     const [auth_token, setAuthToken] = React.useState('');
 
@@ -45,7 +46,7 @@ export default function Login(props) {
                     history.push('/');
                     // return <Redirect to="/add"/>;
                 } else {
-                    console.log("Congrats, you're not registered! Take my advise, use another app!!!");
+                    setError("Account not registered...")
                 }
             })
             .catch(error => {
@@ -67,6 +68,7 @@ export default function Login(props) {
                 <Typography component="h1" variant="h5">
                     Sign in
                 </Typography>
+                {error.length > 0 && <p style={{color:"red"}}>{error} <Link onClick={() => {props.setSignIn(false)}}>Sign Up</Link></p>}
                 <form className={classes.form} noValidate>
                     <TextField
                         variant="outlined"

@@ -55,6 +55,7 @@ import moment from "moment";
 import Grow from "@material-ui/core/Grow";
 import {addTaskToDatabase, deleteTaskListFromDatabase, editTaskOfDatabase} from "../db/db";
 import AppContext from "../context/ContextAPI";
+import AlertDialogSlide from "./EditPopUp";
 
 const ViewFile = (props) => {
     const classes = useStyles();
@@ -103,6 +104,21 @@ const ViewFile = (props) => {
         setState(false);
     };
 
+    const [dialogueState, setDialogueState] = React.useState(false);
+
+    // const handleClickOpen = () => {
+    //     setOpenDialogue(true);
+    // };
+    //
+    // const handleCloseDialogue = () => {
+    //     setOpen(false);
+    // };
+
+    const TaskDetails = (task, tasklist)=> {
+        console.log(task)
+        return <AlertDialogSlide task = {task} tasklist = {tasklist} />
+    }
+
   return (
       <React.Fragment>
          <div id="test" className={classes.bodyContent}>
@@ -150,7 +166,8 @@ const ViewFile = (props) => {
                                                  size="small">
                                                  <TableBody>
                                                      {list.tasks.map((task) => (
-                                                         <TableRow >
+                                                         <TableRow onClick={()=>setDialogueState(!dialogueState)} >
+                                                             <AlertDialogSlide task={task} tasklist={list} state={dialogueState} setState = {(state) => {setDialogueState(state)}}/>
                                                              <TableCell>
                                                                  <FormControlLabel
                                                                      control={

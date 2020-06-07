@@ -23,6 +23,7 @@ export default function SignUp(props) {
     const [name, setName] = React.useState('');
     const [email, setEmail] = React.useState('');
     const [password, setPassword] = React.useState('');
+    const [error, setError] = React.useState('');
     const {user, setUser} = useContext(AppContext);
     const [auth_token, setAuthToken] = React.useState('');
 
@@ -74,14 +75,13 @@ export default function SignUp(props) {
                 console.log(result);
                 if(result.token){
                     setAuthToken(result.token);
-                    console.log("you are registered with us, sorry, we cant help!");
                 }
                 else{
-                    console.log("Congrats, you're not registered! Take my advise, use another app!!!");
+                    setError('Account Already registered..')
                 }
             })
             .catch(error => {
-                console.log("Something went wrong... Even idk what.. dont wait up, its never gonna work!")
+                setError("Something went wrong... ")
             })
     }
 
@@ -94,6 +94,7 @@ export default function SignUp(props) {
                 <Typography component="h1" variant="h5">
                     Sign up
                 </Typography>
+                {error.length > 0 && <p style={{color:"red"}}>{error}</p>}
                 <form className={classes.form} noValidate>
                     <TextField
                         variant="outlined"

@@ -6,14 +6,11 @@ import Login from "./Login";
 import SignUp from "./SignUp";
 import {useStyles} from "../style/LandingPage";
 import {Route} from 'react-router-dom';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
 
 
-export default function LandingPage(name, value) {
+export default function LandingPage(props) {
     const classes = useStyles();
     const [signIn, setSignIn] = React.useState('true')
-    const matches = useMediaQuery('(min-width:600px)');
-    const minWidth = "680px";
 
     return (
         <div>
