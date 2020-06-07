@@ -51,7 +51,7 @@ export const getData = (taskList) => {
     const today = moment.now();
     taskList.map((taskList) => {
         taskList.tasks.map((task) => {
-            if(task.status === 'completed'){
+            if(task.status === 'COMPLETED'){
                 tasksCompleted.push(task);
             }
             else if(task.status === 'not-started'){

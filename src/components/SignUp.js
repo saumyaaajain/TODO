@@ -63,7 +63,7 @@ export default function SignUp(props) {
             redirect: 'follow'
         };
 
-        fetch("http://localhost:8010/register", requestOptions)
+        fetch("https://todo-app-demo-backend.herokuapp.com/register", requestOptions)
             .then(response => {
                 const variable = response.json();
                 console.log("I'll gooooo madddd", variable );

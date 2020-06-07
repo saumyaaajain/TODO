@@ -1,25 +1,26 @@
-
+import moment from "moment";
 
 export default (taskList) => {
     let dateMap = new Map();
     let taskArray = [];
     taskList.map((taskList) => {
         taskList.tasks.map((task) => {
-            if(dateMap.has(task.endDate.format('DD/MM/YYYY'))){
-                taskArray = dateMap.get(task.endDate.format('DD/MM/YYYY'));
+            const endDate = (task.endDate.isAMomentObject ? task.endDate : moment(task.endDate)).format('DD/MM/YYYY');
+            if(dateMap.has(endDate)){
+                taskArray = dateMap.get(endDate);
                 const newTask = {
                     taskListName: taskList.title,
                     ...task
                 }
                 taskArray.push(newTask);
-                dateMap.set(task.endDate.format('DD/MM/YYYY'), taskArray);
+                dateMap.set(endDate, taskArray);
             }
             else{
                 const newTask = {
                     taskListName: taskList.title,
                     ...task
                 }
-                dateMap.set(task.endDate.format('DD/MM/YYYY'), [newTask]);
+                dateMap.set(endDate, [newTask]);
             }
         });
     });

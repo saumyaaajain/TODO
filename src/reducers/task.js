@@ -1,3 +1,4 @@
+import moment from "moment";
 
 const defaultTaskState = [];
 
@@ -48,7 +49,14 @@ export default (state = defaultTaskState, action) => {
                 tasklistList.push({
                     id: tasklist._id,
                     title: tasklist.title,
-                    tasks: tasklist.tasks
+                    tasks: tasklist.tasks.map((task) => {
+                        return {
+                            ...task,
+                            createdAt: task.createdAt.isAMomentObject ? task.createdAt : moment(task.createdAt),
+                            startDate: task.startDate.isAMomentObject ? task.startDate : moment(task.startDate),
+                            endDate: task.endDate.isAMomentObject ? task.endDate : moment(task.endDate)
+                        }
+                    })
                 });
             })
             return tasklistList

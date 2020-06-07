@@ -11,7 +11,7 @@ export const fetchTaskListFromDatabase = (props, auth_token) => {
         redirect: 'follow'
     };
 
-    fetch("http://localhost:8010/tasklist/", requestOptions)
+    fetch("https://todo-app-demo-backend.herokuapp.com/tasklist/", requestOptions)
         .then(response => {
             return response.json();
 
@@ -32,8 +32,7 @@ export const addTaskListToDatabase = (
         tasks = [],
         props
     } ) => {
-    console.log(tasks);
-    console.log(tasks[0].title);
+
     const myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${auth_token}`);
     myHeaders.append("Content-Type", "application/x-www-form-urlencoded");
@@ -48,7 +47,7 @@ export const addTaskListToDatabase = (
         redirect: 'follow'
     };
 
-    fetch("http://localhost:8010/tasklist", requestOptions)
+    fetch("https://todo-app-demo-backend.herokuapp.com/tasklist", requestOptions)
         .then(response => {
             return response.json();
 
@@ -82,7 +81,7 @@ export const addTaskToDatabase = ({props, tasklist_id, auth_token, title, descri
         redirect: 'follow'
     };
 
-    fetch("http://localhost:8010/task", requestOptions)
+    fetch("https://todo-app-demo-backend.herokuapp.com/task", requestOptions)
         .then(response => {
             return response.json();
 
@@ -115,7 +114,7 @@ export const editTaskOfDatabase = ({props, auth_token, list_id ,task_id, status,
         redirect: 'follow'
     };
 
-    fetch(`http://localhost:8010/task/${task_id}`, requestOptions)
+    fetch(`https://todo-app-demo-backend.herokuapp.com/task/${task_id}`, requestOptions)
         .then(response => {
             return response.json();
 
@@ -147,7 +146,7 @@ export const deleteTaskListFromDatabase = ({props, auth_token, tasklist_id}) => 
         redirect: 'follow'
     };
 
-    fetch(`http://localhost:8010/tasklist/${tasklist_id}`, requestOptions)
+    fetch(`https://todo-app-demo-backend.herokuapp.com/tasklist/${tasklist_id}`, requestOptions)
         .then(response => {
             return response.json();
 
