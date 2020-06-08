@@ -30,7 +30,6 @@ export const addTaskList = (
 export const addTask = ({
     id,
     task }) => {
-    console.log(task)
     return {
     type: 'ADD_TASK',
     id,

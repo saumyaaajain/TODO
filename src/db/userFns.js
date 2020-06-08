@@ -18,7 +18,6 @@ export const login = (email, password, auth_token) => {
     return fetch("https://todo-app-demo-backend.herokuapp.com/login", requestOptions)
         .then(response => {
             const variable = response.json();
-            console.log("I'll gooooo madddd", variable );
             return variable;
 
         })

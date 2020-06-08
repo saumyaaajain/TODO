@@ -17,7 +17,6 @@ export const fetchTaskListFromDatabase = (props, auth_token) => {
 
         })
         .then(result => {
-            console.log(result);
             props.dispatch(setTaskList(result));
         })
         .catch(error => {
@@ -54,13 +53,11 @@ export const addTaskListToDatabase = (
         })
         .then(result => {
             console.log("WHOOOOOO!! task list added!");
-            console.log(result);
             !result.error && props.dispatch(addTaskList({...result}))
             tasks.length > 0 ? addTaskToDatabase({auth_token: auth_token ,props: props, tasklist_id: result._id, title: tasks[0].title, description: tasks[0].description}) : props.location && props.history.push('/');
         })
         .catch(error => {
             console.log("Something went wrong with task list adding... Even idk what.. !");
-            console.log(error);
         })
 }
 
@@ -88,7 +85,6 @@ export const addTaskToDatabase = ({props, tasklist_id, auth_token, title, descri
         })
         .then(result => {
             console.log("WHOOOOOO!! task list added!");
-            console.log(result);
             props.dispatch(addTask({id: tasklist_id, task: {
                 ...result,
                     createdAt: result.createdAt.isAMomentObject ? result.createdAt : moment(result.createdAt),
@@ -99,7 +95,6 @@ export const addTaskToDatabase = ({props, tasklist_id, auth_token, title, descri
         })
         .catch(error => {
             console.log("Something went wrong with task adding...");
-            console.log(error);
         })
 }
 
@@ -127,12 +122,10 @@ export const editTaskOfDatabase = ({props, auth_token, list_id ,task_id, status,
         .then(result => {
             console.log("WHOOOOOO!! task updated!");
             props.dispatch(editTask(list_id, task_id, {status: "COMPLETED", reoccur: taskReoccur, completedOn: moment().format('DD/MM/YYYY')}));
-            console.log(result);
 
         })
         .catch(error => {
             console.log("Something went wrong with task updating...");
-            console.log(error);
         })
 }
 
@@ -159,12 +152,10 @@ export const deleteTaskListFromDatabase = ({props, auth_token, tasklist_id}) => 
         .then(result => {
             console.log("WHOOOOOO!! task deleted!");
             props.dispatch(removeTaskList(tasklist_id));
-            console.log(result);
 
         })
         .catch(error => {
             console.log("Something went wrong with task updating...");
-            console.log(error);
         })
 }
 

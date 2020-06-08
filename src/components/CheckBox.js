@@ -8,7 +8,6 @@ import Checkbox from '@material-ui/core/Checkbox';
 
 
 export default function CheckboxesGroup(props) {
-    console.log(props);
     const classes = useStyles();
     const [state, setState] = React.useState([{
         c: props.task.status === 'completed',

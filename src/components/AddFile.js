@@ -36,7 +36,6 @@ const initialState = {
 export default class AddFile extends React.Component{
     constructor(props) {
         super(props);
-        console.log(props);
         this.state = initialState;
     }
 
@@ -70,15 +69,12 @@ export default class AddFile extends React.Component{
                 days: endDate.diff(startDate , 'days')
             });
         }
-        console.log(this.state.startDate);
     };
     onFocusChange = ({ focused }) => {
-        console.log(focused);
         this.setState({ focused });
     };
 
     onChange = (time) =>{
-        console.log(time);
     };
 
     onAddTask = () => {
@@ -106,7 +102,6 @@ export default class AddFile extends React.Component{
             this.setState({
                 error: ''
             });
-            console.log(this.state.status);
             const task = {
                 title: this.state.title,
                 description: this.state.description,

@@ -27,7 +27,6 @@ const AddTaskPage = (props) => {
                 </Title>
                 <AddFile
                     onSubmit = { (taskList) => {
-                        console.log(taskList);
                         addTaskListToDatabase( {auth_token: user.token, ...taskList, props:props});
                     }}
                 />

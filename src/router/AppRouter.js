@@ -9,9 +9,6 @@ import LandingPage from "../components/LandingPage";
 function AppRouter(props) {
 
     const [user, setUser] = React.useState(  localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : {});
-    // console.log(JSON.parse(localStorage.getItem('user')))
-    // const userDe = JSON.parse(localStorage.getItem('user'));
-    console.log(user);
     const value = { user, setUser };
     if(user.token){
         return (

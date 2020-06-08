@@ -34,13 +34,11 @@ export default function Login(props) {
 
     const signIn = (e) => {
         e.preventDefault();
-        console.log("sign in button clicked");
         login(email, password)
             .then(result => {
-                console.log(result);
                 if (result.token) {
                     setAuthToken(result.token);
-                    console.log("you are registered with us, sorry, we cant help!");
+                    console.log("you are registered with us!");
                     setUser(result);
                     localStorage.setItem('user', JSON.stringify(result));
                     history.push('/');
@@ -50,7 +48,7 @@ export default function Login(props) {
                 }
             })
             .catch(error => {
-                console.log("Something went wrong... Even idk what.. dont wait up, its never gonna work!")
+                console.log("Something went wrong... ")
             })
 
     };

@@ -10,7 +10,6 @@ export default (state = defaultTaskState, action) => {
                 action.taskLists
             ];
         case 'ADD_TASK':
-            console.log(action.tasks);
             return state.map((taskList) => {
                 if (taskList.id === action.id) {
                     taskList.tasks.push(action.tasks);

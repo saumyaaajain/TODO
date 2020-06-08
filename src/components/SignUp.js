@@ -67,12 +67,10 @@ export default function SignUp(props) {
         fetch("https://todo-app-demo-backend.herokuapp.com/register", requestOptions)
             .then(response => {
                 const variable = response.json();
-                console.log("I'll gooooo madddd", variable );
                 return variable;
 
             })
             .then(result => {
-                console.log(result);
                 if(result.token){
                     setAuthToken(result.token);
                 }

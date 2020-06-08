@@ -81,8 +81,6 @@ const ViewFile = (props) => {
     });
 
     const handleChange = (event, listId ,taskId, task) => {
-        console.log(listId);
-        console.log(taskId);
         setCheckbox({ ...checkboxValue, [event.target.name]: event.target.checked });
         if(task.reoccur){
             props.dispatch(editTask(listId, taskId, {status: "in-progress", reoccur: task.reoccur, completedOn: moment().format('DD/MM/YYYY')}));
@@ -110,7 +108,6 @@ const ViewFile = (props) => {
     const popUp = (task) => {
         setDialogueState(!dialogueState);
         setDialogueTask(task);
-        console.log(task);
     }
 
     // const handleClickOpen = () => {
@@ -122,7 +119,6 @@ const ViewFile = (props) => {
     // };
 
     // const TaskDetails = (task, tasklist)=> {
-    //     console.log(task)
     //     return <AlertDialogSlide task = {task} tasklist = {tasklist} />
     // }
 
@@ -291,7 +287,6 @@ const ViewFile = (props) => {
 };
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return {
         taskLists: selectTasks(state.taskLists, state.filters)
     }

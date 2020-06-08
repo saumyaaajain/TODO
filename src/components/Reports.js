@@ -71,8 +71,6 @@ const Reports = (props) => {
     const classes = useStyles();
     const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
     const chartData = props.data.pieData;
-    console.log(props);
-    console.log(props.data.upcomingTasks.length);
     const today = moment.now();
 
     return (
@@ -179,7 +177,6 @@ const Reports = (props) => {
 
 
 const mapStateToProps = (state) => {
-    console.log(state.data);
     return {
         data: getData(state.taskLists)
     }

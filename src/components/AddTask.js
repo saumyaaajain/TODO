@@ -36,7 +36,6 @@ export class AddTaskDetails extends React.Component{
         super(props);
         this.state = initialState;
     }
-    //console.log(props);
 
     onDescriptionChange = (e) => {
         e.preventDefault();
@@ -53,10 +52,8 @@ export class AddTaskDetails extends React.Component{
                 days: endDate.diff(startDate , 'days')
             });
         }
-        console.log(this.state.startDate);
     };
     onFocusChange = ({ focused }) => {
-        console.log(focused);
         this.setState({ focused });
     };
 
@@ -69,7 +66,6 @@ export class AddTaskDetails extends React.Component{
     };
 
     onSubmit = (e) => {
-        console.log(this.state.timeObject);
         const task = {
             title: this.state.title,
             description: this.state.description,

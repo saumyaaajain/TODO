@@ -43,7 +43,6 @@ const TaskListFilters = (props) => {
                     value={props.filters.sortBy}
                     onChange={(e) => {
                         if (e.target.value === 'date') {
-                            //console.log(props);
                             props.dispatch(sortByDate());
                         } else if(e.target.value === 'start-date'){
                             props.dispatch(sortByStartDate());
@@ -92,7 +91,6 @@ const TaskListFilters = (props) => {
 )};
 
 const mapStateToProps = (state) => {
-    //console.log(state);
     return {
         filters: state.filters
     };

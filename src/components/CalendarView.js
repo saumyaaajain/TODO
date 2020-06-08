@@ -23,19 +23,15 @@ class CalendarView extends React.Component{
     constructor(props) {
         super(props);
         const today= moment();
-        console.log(props);
-        console.log(today.format('DD/MM/YYYY'));
         this.state = {
             date: moment(),
             formattedDate: today.format('DD/MM/YYYY'),
             event : props.location.list,
             dateWiseSortedMap: props.dateWiseSortedMap
         }
-        console.log(props);
     }
 
     onDateChange = date => {
-        console.log(date);
         this.setState({ date , formattedDate: date.format('DD/MM/YYYY')});
     };
 

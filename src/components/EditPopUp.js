@@ -8,21 +8,13 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Slide from '@material-ui/core/Slide';
 import { Alert } from '@material-ui/lab';
 import CheckIcon from '@material-ui/icons/Check';
-import CheckBox from "./CheckBox";
 
 const Transition = React.forwardRef(function Transition(props, ref) {
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
 export default function AlertDialogSlide(props) {
-    console.log(props);
     const [open, setOpen] = React.useState(props.state);
-    const [status, setStatus] = React.useState({status: props.task.status})
-
-    const handleClickOpen = () => {
-        setOpen(true);
-        props.setState(true);
-    };
 
     const handleClose = () => {
         setOpen(false);
