@@ -55,7 +55,7 @@ import moment from "moment";
 import Grow from "@material-ui/core/Grow";
 import {addTaskToDatabase, deleteTaskListFromDatabase, editTaskOfDatabase} from "../db/db";
 import AppContext from "../context/ContextAPI";
-import AlertDialogSlide from "./EditPopUp";
+import Alert from "./EditPopUp";
 
 const ViewFile = (props) => {
     const classes = useStyles();
@@ -106,6 +106,11 @@ const ViewFile = (props) => {
 
     const [dialogueState, setDialogueState] = React.useState(false);
 
+    const popUp = (task) => {
+        setDialogueState(!dialogueState)
+        console.log(task);
+    }
+
     // const handleClickOpen = () => {
     //     setOpenDialogue(true);
     // };
@@ -114,10 +119,10 @@ const ViewFile = (props) => {
     //     setOpen(false);
     // };
 
-    const TaskDetails = (task, tasklist)=> {
-        console.log(task)
-        return <AlertDialogSlide task = {task} tasklist = {tasklist} />
-    }
+    // const TaskDetails = (task, tasklist)=> {
+    //     console.log(task)
+    //     return <AlertDialogSlide task = {task} tasklist = {tasklist} />
+    // }
 
   return (
       <React.Fragment>
@@ -166,8 +171,8 @@ const ViewFile = (props) => {
                                                  size="small">
                                                  <TableBody>
                                                      {list.tasks.map((task) => (
-                                                         <TableRow onClick={()=>setDialogueState(!dialogueState)} >
-                                                             <AlertDialogSlide task={task} tasklist={list} state={dialogueState} setState = {(state) => {setDialogueState(state)}}/>
+                                                         <TableRow onClick={()=>popUp(task)} >
+                                                             {dialogueState && <Alert id={task.id} task={task} tasklist={list} state={dialogueState} setState = {(state) => {setDialogueState(state)}}/>}
                                                              <TableCell>
                                                                  <FormControlLabel
                                                                      control={
@@ -186,6 +191,7 @@ const ViewFile = (props) => {
                                                              {task.time !== '' && <TableCell>{task.reoccur && task.reoccurDay} {task.time}</TableCell>}
                                                          </TableRow>
                                                      ))}
+
 
                                                  </TableBody>
                                              </Table>

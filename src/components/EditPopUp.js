@@ -15,7 +15,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 export default function AlertDialogSlide(props) {
-    const [open, setOpen] = React.useState(false);
+    console.log(props);
+    const [open, setOpen] = React.useState(props.state);
     const [status, setStatus] = React.useState({status: props.task.status})
 
     const handleClickOpen = () => {
@@ -31,7 +32,8 @@ export default function AlertDialogSlide(props) {
     return (
         <div>
             <Dialog
-                open={props.state}
+                id={props.task.id}
+                open={open}
                 TransitionComponent={Transition}
                 fullWidth={true}
                 keepMounted
@@ -46,7 +48,7 @@ export default function AlertDialogSlide(props) {
                     <Title>{props.task.title}</Title>
                 </DialogTitle>
                 <DialogTitle>
-                    {props.task.description}                                  ... from {props.tasklist.title}
+                    {props.task.description}                                  ... from {props.task.title}
                 </DialogTitle>
                 <DialogContent>
                     <p>Created At: {props.task.createdAt.toString()}</p>

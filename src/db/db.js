@@ -89,7 +89,12 @@ export const addTaskToDatabase = ({props, tasklist_id, auth_token, title, descri
         .then(result => {
             console.log("WHOOOOOO!! task list added!");
             console.log(result);
-            props.dispatch(addTask({id: tasklist_id, task: {...result}}))
+            props.dispatch(addTask({id: tasklist_id, task: {
+                ...result,
+                    createdAt: result.createdAt.isAMomentObject ? result.createdAt : moment(result.createdAt),
+                    startDate: result.startDate.isAMomentObject ? result.startDate : moment(result.startDate),
+                    endDate: result.endDate.isAMomentObject ? result.endDate : moment(result.endDate)
+            }}))
             props.location && props.history.push('/');
         })
         .catch(error => {
