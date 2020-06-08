@@ -105,9 +105,11 @@ const ViewFile = (props) => {
     };
 
     const [dialogueState, setDialogueState] = React.useState(false);
+    const [dialogueTask, setDialogueTask] = React.useState({});
 
     const popUp = (task) => {
-        setDialogueState(!dialogueState)
+        setDialogueState(!dialogueState);
+        setDialogueTask(task);
         console.log(task);
     }
 
@@ -172,7 +174,7 @@ const ViewFile = (props) => {
                                                  <TableBody>
                                                      {list.tasks.map((task) => (
                                                          <TableRow onClick={()=>popUp(task)} >
-                                                             {dialogueState && <Alert id={task.id} task={task} tasklist={list} state={dialogueState} setState = {(state) => {setDialogueState(state)}}/>}
+                                                             {dialogueState && <Alert id={task.id} task={dialogueTask} tasklist={list} state={dialogueState} setState = {(state) => {setDialogueState(state)}}/>}
                                                              <TableCell>
                                                                  <FormControlLabel
                                                                      control={
